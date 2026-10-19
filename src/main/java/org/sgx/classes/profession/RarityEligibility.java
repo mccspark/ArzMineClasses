@@ -75,4 +75,10 @@ public final class RarityEligibility {
     public static boolean isHammer(ItemStack stack) {
         return stack.is(ModItems.BLACKSMITH_HAMMER) || stack.is(ModItems.COPPER_HAMMER);
     }
+
+    /** Деревянные и каменные предметы (wooden_*, stone_*): кирки, топоры, лопаты, мотыги, мечи, копья. */
+    public static boolean isWoodOrStoneTier(ItemStack stack) {
+        String path = BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath();
+        return path.startsWith("wooden_") || path.startsWith("stone_");
+    }
 }

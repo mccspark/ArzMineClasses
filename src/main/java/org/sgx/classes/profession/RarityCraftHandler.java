@@ -38,7 +38,10 @@ public final class RarityCraftHandler {
 
         // +5 опыта за крафт любого предмета, который может получить редкость —
         // кольцо опыта уже учитывается автоматически внутри grantXp().
-        ProfessionFeedback.grantXp(player, ProfessionType.BLACKSMITH, XP_PER_DURABLE_CRAFT);
+        // Деревянные и каменные предметы (инструменты, мечи, копья) опыта не дают.
+        if (!RarityEligibility.isWoodOrStoneTier(stack)) {
+            ProfessionFeedback.grantXp(player, ProfessionType.BLACKSMITH, XP_PER_DURABLE_CRAFT);
+        }
 
         float common = 0f, rare = 0f, epic = 0f, legendary = 0f, mythic = 0f;
         for (RarityWeights.Weight w : weights) {
