@@ -62,6 +62,7 @@ public class Arz_classes implements ModInitializer {
 		ModCreativeTabs.init();
 		SkillUnlockEvents.init();
 		HammerArmorGuard.init();
+		FishingRodRepair.init();
 		EnchantFullPreviewPayload.registerCommon();
 		DiamondShardCrafting.init();
 		FarmerAnimalKillEvents.registerBehavior(new org.sgx.classes.profession.impl.FarmerBehavior());

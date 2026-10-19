@@ -1,0 +1,20 @@
+﻿
+> Configure project :
+Fabric Loom: 1.17.12
+
+> Task :clean
+
+> Task :compileJava
+.\gradlew : Note: Some input files use or override a deprecated API.
+At line:1 char:1
++ .\gradlew clean compileJava 2>&1 | Out-File -Encoding utf8 build_log. ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Note: Some inpu...deprecated API.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Note: Recompile with -Xlint:deprecation for details.
+
+[Incubating] Problems report is available at: file:///D:/my_mods/arz_classes/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 7s
+2 actionable tasks: 2 executed

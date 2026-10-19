@@ -71,6 +71,9 @@ public final class TreeChopSpeed {
                     + " ability=" + ability);
         }
 
+        // Бонус скорости навыков (лесоруб/шахтёр) — применяется всегда, независимо от трикопитейтора
+        progress = applySkillSpeed(progress, state, player, data);
+
         if (progress <= 0f || !isLog || !axe || player.isShiftKeyDown() || !ability) {
             return progress;
         }
@@ -94,6 +97,30 @@ public final class TreeChopSpeed {
                     + " logs=" + logs + " slowdown=" + slowdown);
         }
         return (float) (progress / slowdown);
+    }
+
+    /**
+     * Процентный бонус скорости добычи от навыков:
+     *  - лесоруб: топор по деревянным блокам -> lumberjack.wood_break_speed_percent
+     *  - шахтёр: кирка по каменным блокам   -> miner.mining_speed_percent
+     * Работает и на клиенте (предсказание прогресса), и на сервере, поэтому данные берём
+     * из того же источника, что и остальной adjust().
+     */
+    private static float applySkillSpeed(float progress, BlockState state, Player player, ProfessionData data) {
+        if (progress <= 0f || data == null) {
+            return progress;
+        }
+        net.minecraft.world.item.ItemStack tool = player.getMainHandItem();
+        double percent = 0;
+        if (tool.is(ItemTags.AXES) && state.is(BlockTags.MINEABLE_WITH_AXE)) {
+            percent = data.customScalarTotal("lumberjack.wood_break_speed_percent");
+        } else if (tool.is(ItemTags.PICKAXES) && state.is(BlockTags.MINEABLE_WITH_PICKAXE)) {
+            percent = data.customScalarTotal("miner.mining_speed_percent");
+        }
+        if (percent <= 0) {
+            return progress;
+        }
+        return (float) (progress * (1.0 + percent / 100.0));
     }
 
     private static int cachedCount(Cache cache, Player player, BlockGetter level, BlockPos pos,
