@@ -462,5 +462,8 @@
   "guide.arz_classes.class_info.common.3": "A subclass fork appears in the tree at level 10. You can choose a subclass only once the server opens the choice; while it is closed, XP stops counting at level 9.",
   "guide.arz_classes.class_info.common.4": "The subclass choice is permanent: the other branch is closed for good.",
   "guide.arz_classes.class_info.common.5": "Changing your class completely resets the level, XP, subclass and skills of the previous class.",
-  "guide.arz_classes.class_info.common.6": "Hover over the XP bar to see the exact amount of XP."
+  "guide.arz_classes.class_info.common.6": "Hover over the XP bar to see the exact amount of XP.",
+
+  "item.arz_classes.fishing_rod_repair_kit": "Fishing Rod Repair Kit",
+  "message.arz_classes.rod_repair_success": "Fishing rod repaired: +%s%% durability"
 }
