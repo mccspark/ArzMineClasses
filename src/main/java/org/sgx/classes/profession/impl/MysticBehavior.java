@@ -7,7 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public final class MysticBehavior implements ProfessionBehavior {
 
-    private static final int XP_PER_ENCHANT_LEVEL = 20;
+    private static final int XP_PER_ENCHANT_LEVEL = 40;
     private static final int XP_PER_POTION_BASE = 100;
     private static final int XP_PER_POTION_TIER_BONUS = 40;
 

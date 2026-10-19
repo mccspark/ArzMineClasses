@@ -52,8 +52,8 @@ public final class ModItems {
             ResourceKey.create(Registries.ITEM, Arz_classes.id("golden_wheat"));
     private static final ResourceKey<Item> FIREWOOD_KEY =
             ResourceKey.create(Registries.ITEM, Arz_classes.id("firewood"));
-    private static final ResourceKey<Item> FISHING_ROD_REPAIR_KIT_KEY =
-            ResourceKey.create(Registries.ITEM, Arz_classes.id("fishing_rod_repair_kit"));
+    private static final ResourceKey<Item> COIL_KEY =
+            ResourceKey.create(Registries.ITEM, Arz_classes.id("coil"));
     private static final ResourceKey<Item> MINER_HELMET_KEY =
             ResourceKey.create(Registries.ITEM, Arz_classes.id("miner_helmet"));
 
@@ -79,10 +79,10 @@ public final class ModItems {
             new Item.Properties().setId(FIREWOOD_KEY));
 
     /** Набор для починки удочки: удочка в одной руке, набор в другой, ПКМ -> +10% прочности (см. FishingRodRepair). */
-    public static final Item FISHING_ROD_REPAIR_KIT = new Item(
+    public static final Item COIL = new Item(
             new Item.Properties()
                     .stacksTo(16)
-                    .setId(FISHING_ROD_REPAIR_KIT_KEY));
+                    .setId(COIL_KEY));
 
     public static final Item MINER_HELMET = new Item(
             new Item.Properties()
@@ -266,7 +266,7 @@ public final class ModItems {
         Registry.register(BuiltInRegistries.ITEM, COPPER_HAMMER_KEY, COPPER_HAMMER);
         Registry.register(BuiltInRegistries.ITEM, DIAMOND_SHARD_KEY, DIAMOND_SHARD);
         Registry.register(BuiltInRegistries.ITEM, FIREWOOD_KEY, FIREWOOD);
-        Registry.register(BuiltInRegistries.ITEM, FISHING_ROD_REPAIR_KIT_KEY, FISHING_ROD_REPAIR_KIT);
+        Registry.register(BuiltInRegistries.ITEM, COIL_KEY, COIL);
         Registry.register(BuiltInRegistries.ITEM, MINER_HELMET_KEY, MINER_HELMET);
         Registry.register(BuiltInRegistries.ITEM, ADMIN_DAMAGE_STICK_KEY, ADMIN_DAMAGE_STICK);
         Registry.register(BuiltInRegistries.ITEM, ADMIN_KNOCKBACK_STICK_KEY, ADMIN_KNOCKBACK_STICK);

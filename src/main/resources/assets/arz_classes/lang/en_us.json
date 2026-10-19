@@ -464,6 +464,6 @@
   "guide.arz_classes.class_info.common.5": "Changing your class completely resets the level, XP, subclass and skills of the previous class.",
   "guide.arz_classes.class_info.common.6": "Hover over the XP bar to see the exact amount of XP.",
 
-  "item.arz_classes.fishing_rod_repair_kit": "Fishing Rod Repair Kit",
+  "item.arz_classes.coil": "Fishing Rod Repair Coil",
   "message.arz_classes.rod_repair_success": "Fishing rod repaired: +%s%% durability"
 }

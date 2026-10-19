@@ -464,6 +464,6 @@
   "guide.arz_classes.class_info.common.5": "При смене класса уровень, опыт, подкласс и навыки прежнего класса сбрасываются полностью.",
   "guide.arz_classes.class_info.common.6": "Точное количество опыта видно, если навести курсор на полоску опыта.",
 
-  "item.arz_classes.fishing_rod_repair_kit": "Набор для починки удочки",
+  "item.arz_classes.coil": "Катушка для удочки",
   "message.arz_classes.rod_repair_success": "Удочка починена: +%s%% прочности"
 }

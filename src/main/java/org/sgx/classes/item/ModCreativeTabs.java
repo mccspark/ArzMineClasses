@@ -27,7 +27,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.DIAMOND_SHARD);
                         output.accept(ModItems.FIREWOOD);
                         output.accept(ModItems.KNOWLEDGE_SCROLL);
-                        output.accept(ModItems.FISHING_ROD_REPAIR_KIT);
+                        output.accept(ModItems.COIL);
                         output.accept(ModItems.MINER_HELMET);
                         output.accept(ModItems.ADMIN_DAMAGE_STICK);
                         output.accept(ModItems.ADMIN_KNOCKBACK_STICK);

@@ -35,10 +35,10 @@ public final class FishingRodRepair {
 
             ItemStack rod;
             ItemStack kit;
-            if (main.is(Items.FISHING_ROD) && off.is(ModItems.FISHING_ROD_REPAIR_KIT)) {
+            if (main.is(Items.FISHING_ROD) && off.is(ModItems.COIL)) {
                 rod = main;
                 kit = off;
-            } else if (main.is(ModItems.FISHING_ROD_REPAIR_KIT) && off.is(Items.FISHING_ROD)) {
+            } else if (main.is(ModItems.COIL) && off.is(Items.FISHING_ROD)) {
                 rod = off;
                 kit = main;
             } else {

@@ -54,14 +54,14 @@ public final class SkillTrees {
 
         // ---------------- ШАХТЁР ----------------
         MAIN.put(ProfessionType.MINER, new SkillChainBuilder(1)
-                .scalar("miner_speed", 1, "miner.mining_speed_percent", 10.0, "skill.arz_classes.miner_speed")
+                .scalar("miner_speed", 1, "miner.mining_speed_percent", 5.0, "skill.arz_classes.miner_speed")
                 .scalar("miner_bonus_coal", 1, "miner.bonus_drop_coal", 1.0, "skill.arz_classes.miner_bonus_coal")
                 .milestone("miner_helmet", "miner_helmet", "skill.arz_classes.miner_helmet")
-                .scalar("miner_speed", 1, "miner.mining_speed_percent", 10.0, "skill.arz_classes.miner_speed")
+                .scalar("miner_speed", 1, "miner.mining_speed_percent", 5.0, "skill.arz_classes.miner_speed")
                 .scalar("miner_bonus_iron", 1, "miner.bonus_drop_iron", 1.0, "skill.arz_classes.miner_bonus_iron")
-                .scalar("miner_speed", 1, "miner.mining_speed_percent", 10.0, "skill.arz_classes.miner_speed")
+                .scalar("miner_speed", 1, "miner.mining_speed_percent", 5.0, "skill.arz_classes.miner_speed")
                 .scalar("miner_bonus_iron", 1, "miner.bonus_drop_iron", 1.0, "skill.arz_classes.miner_bonus_iron")
-                .scalar("miner_speed", 1, "miner.mining_speed_percent", 10.0, "skill.arz_classes.miner_speed")
+                .scalar("miner_speed", 1, "miner.mining_speed_percent", 5.0, "skill.arz_classes.miner_speed")
                 .scalar("miner_bonus_gold", 1, "miner.bonus_drop_gold", 1.0, "skill.arz_classes.miner_bonus_gold")
                 .build(10));
 
@@ -120,15 +120,15 @@ public final class SkillTrees {
 
         // ---------------- ЛЕСОРУБ ----------------
         MAIN.put(ProfessionType.LUMBERJACK, new SkillChainBuilder(1)
-                .scalar("lumberjack_speed", 1, "lumberjack.wood_break_speed_percent", 8.0, "skill.arz_classes.lumberjack_speed")
+                .scalar("lumberjack_speed", 1, "lumberjack.wood_break_speed_percent", 4.0, "skill.arz_classes.lumberjack_speed")
                 .scalar("lumberjack_leaf_drop", 1, "lumberjack.leaf_drop_chance_percent", 5.0, "skill.arz_classes.lumberjack_leaf_drop")
                 .scalarAndMilestone("lumberjack_coal_unlock", "lumberjack.coal_drop_chance_percent", 5.0,
                         "lumberjack_coal_chance", "skill.arz_classes.lumberjack_coal_unlock")
                 .milestone("lumberjack_decor", "lumberjack_decor", "skill.arz_classes.lumberjack_decor")
                 .scalar("lumberjack_leaf_drop", 1, "lumberjack.leaf_drop_chance_percent", 5.0, "skill.arz_classes.lumberjack_leaf_drop")
-                .scalar("lumberjack_speed", 1, "lumberjack.wood_break_speed_percent", 8.0, "skill.arz_classes.lumberjack_speed")
+                .scalar("lumberjack_speed", 1, "lumberjack.wood_break_speed_percent", 4.0, "skill.arz_classes.lumberjack_speed")
                 .scalar("lumberjack_coal_boost", 1, "lumberjack.coal_drop_chance_percent", 5.0, "skill.arz_classes.lumberjack_coal_boost")
-                .scalar("lumberjack_speed", 1, "lumberjack.wood_break_speed_percent", 8.0, "skill.arz_classes.lumberjack_speed")
+                .scalar("lumberjack_speed", 1, "lumberjack.wood_break_speed_percent", 4.0, "skill.arz_classes.lumberjack_speed")
                 .milestone("lumberjack_treecapitator", "lumberjack_treecapitator", "skill.arz_classes.lumberjack_treecapitator")
                 .build(10));
 
