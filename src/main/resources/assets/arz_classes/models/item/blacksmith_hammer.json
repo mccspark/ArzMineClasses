@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "arz_classes:item/blacksmith_hammer"
+  }
+}

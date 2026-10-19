@@ -1,0 +1,76 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version '1.17.12'
+	id 'maven-publish'
+}
+
+version = '2.0'
+group = 'com.example'
+
+base {
+	archivesName = 'arz_classes'
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		name = "Fabric"
+		url = "https://maven.fabricmc.net/"
+
+	}
+	maven {
+		name = "Nucleoid"
+		url = 'https://maven.nucleoid.xyz/releases'
+	}
+	flatDir {
+		dirs 'libs'
+	}
+}
+
+loom {
+	splitEnvironmentSourceSets()
+	mods {
+		"money" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+dependencies {
+
+	minecraft "com.mojang:minecraft:26.2"
+	implementation "net.fabricmc:fabric-loader:0.19.5"
+	implementation "net.fabricmc.fabric-api:fabric-api:0.157.0+26.2"
+	implementation "eu.pb4:trinkets:${trinkets_version}"
+	compileOnly files("libs/capsaicin-mc26.2.0-1.5.0.jar")
+	compileOnly "net.luckperms:api:5.4"
+}
+
+processResources {
+	inputs.property "version", project.version
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+	from("src/main/resources") {
+		include "assets/**"
+	}
+	duplicatesStrategy = DuplicatesStrategy.WARN
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+}
+

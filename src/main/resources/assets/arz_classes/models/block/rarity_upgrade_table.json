@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "arz_classes:block/rarity_upgrade_table_side",
+    "down":  "arz_classes:block/rarity_upgrade_table_bottom",
+    "up":    "arz_classes:block/rarity_upgrade_table_top",
+    "north": "arz_classes:block/rarity_upgrade_table_side",
+    "south": "arz_classes:block/rarity_upgrade_table_side",
+    "east":  "arz_classes:block/rarity_upgrade_table_side",
+    "west":  "arz_classes:block/rarity_upgrade_table_side"
+  }
+}

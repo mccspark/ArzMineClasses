@@ -1,0 +1,47 @@
+{
+	"schemaVersion": 1,
+	"id": "arz_classes",
+	"version": "${version}",
+	"name": "ArzMine Classes",
+	"description": "Система классов для сервера ArzMine: Фермер, Шахтёр, Кузнец, Дровосек и Мистик. \n\nПрокачивайте уровни, открывайте навыки в дереве, выбирайте подкласс, улучшайте снаряжение заточкой и редкостью.\n\nНашли ошибку или баг? Напишите мне в Discord: mc_spark ",
+	"authors": [
+		"Главный разработчик: mcc_spark",
+		"Главный художник: Ko4erga",
+		"Царь батюшка супер сигмасвинка 3000 х3д: SiFeRoK",
+		"Главный тестировщик: arinozga"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/arz_classes/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"org.sgx.classes.Arz_classes"
+		],
+		"client": [
+			"org.sgx.classes.client.Arz_classesClient"
+		],
+		"fabric-datagen": [
+			"org.sgx.classes.client.Arz_classesDataGenerator"
+		]
+	},
+	"mixins": [
+		"arz_classes.mixins.json",
+		{
+			"config": "arz_classes.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"luckperms": ">=5.4"
+}
+}

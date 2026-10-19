@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "DCD",
+    "DDD"
+  ],
+  "key": {
+    "D": "minecraft:dirt",
+    "C": "farmersdelight:organic_compost"
+  },
+  "result": {
+    "id": "farmersdelight:rich_soil",
+    "count": 1
+  }
+}

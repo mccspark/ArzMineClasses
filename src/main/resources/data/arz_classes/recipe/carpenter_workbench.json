@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "PPP",
+    "LCL",
+    "LLL"
+  ],
+  "key": {
+    "P": "#minecraft:planks",
+    "L": "#minecraft:logs",
+    "C": "minecraft:crafting_table"
+  },
+  "result": {
+    "id": "arz_classes:carpenter_workbench",
+    "count": 1
+  }
+}

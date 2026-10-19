@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "arz_classes:carpenter_workbench",
+    "arz_classes:acacia_chest",
+    "arz_classes:trapped_acacia_chest",
+    "arz_classes:bamboo_chest",
+    "arz_classes:trapped_bamboo_chest",
+    "arz_classes:birch_chest",
+    "arz_classes:trapped_birch_chest",
+    "arz_classes:cherry_chest",
+    "arz_classes:trapped_cherry_chest",
+    "arz_classes:warped_chest",
+    "arz_classes:trapped_warped_chest",
+    "arz_classes:dark_oak_chest",
+    "arz_classes:trapped_dark_oak_chest",
+    "arz_classes:jungle_chest",
+    "arz_classes:trapped_jungle_chest",
+    "arz_classes:mangrove_chest",
+    "arz_classes:trapped_mangrove_chest",
+    "arz_classes:oak_chest",
+    "arz_classes:trapped_oak_chest",
+    "arz_classes:spruce_chest",
+    "arz_classes:trapped_spruce_chest",
+    "arz_classes:crimson_chest",
+    "arz_classes:trapped_crimson_chest"
+  ]
+}

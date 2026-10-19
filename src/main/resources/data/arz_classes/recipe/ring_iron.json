@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "IFI",
+    "F F",
+    "IFI"
+  ],
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "F": "arz_classes:rarity_fragment_rare"
+  },
+  "result": { "id": "arz_classes:ring_iron", "count": 1 }
+}

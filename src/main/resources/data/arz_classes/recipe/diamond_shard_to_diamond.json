@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "arz_classes:diamond_shard", "arz_classes:diamond_shard", "arz_classes:diamond_shard",
+    "arz_classes:diamond_shard", "arz_classes:diamond_shard", "arz_classes:diamond_shard",
+    "arz_classes:diamond_shard", "arz_classes:diamond_shard", "arz_classes:diamond_shard"
+  ],
+  "result": { "id": "minecraft:diamond", "count": 1 }
+}

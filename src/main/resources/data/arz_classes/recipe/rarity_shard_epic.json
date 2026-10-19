@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "arz_classes:rarity_fragment_epic",
+    "arz_classes:rarity_fragment_epic",
+    "arz_classes:rarity_fragment_epic",
+    "arz_classes:rarity_fragment_epic"
+  ],
+  "result": {
+    "count": 1,
+    "id": "arz_classes:rarity_shard_epic"
+  }
+}

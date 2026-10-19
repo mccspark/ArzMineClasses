@@ -1,0 +1,32 @@
+{
+	"required": true,
+	"package": "org.sgx.classes.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"BrewingStandMenuPotionSlotMixin",
+		"CraftingResultSlotMixin",
+		"ItemRarityTooltipMixin",
+		"ResultSlotMixin",
+		"CraftingMenuMixin",
+		"CraftingMenuMealStarsMixin",
+		"BlockSetPlacedByMixin",
+		"ShapedRecipeMixin",
+		"MysticEnchantmentMenuMixin",
+		"MysticMobXpMixin",
+		"MysticAnvilMixin",
+		"MysticEndermanCalmMixin",
+		"AbstractContainerMenuInvoker",
+		"FurnaceFirewoodBlockEntityMixin",
+		"FurnaceFirewoodMenuMixin",
+		"FurnaceFirewoodQuickMoveMixin",
+		"BowItemMixin",
+		"CrossbowItemMixin",
+		"BlockBehaviourDestroyProgressMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

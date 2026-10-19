@@ -1,0 +1,11 @@
+{
+  "match": {
+    "type": "minecraft:player",
+    "equipment": {
+      "head": {
+        "items": ["arz_classes:miner_helmet"]
+      }
+    }
+  },
+  "luminance": 15
+}

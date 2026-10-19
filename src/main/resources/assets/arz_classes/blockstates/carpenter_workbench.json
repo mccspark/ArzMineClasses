@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "arz_classes:block/carpenter_workbench" },
+    "facing=east":  { "model": "arz_classes:block/carpenter_workbench", "y": 90 },
+    "facing=south": { "model": "arz_classes:block/carpenter_workbench", "y": 180 },
+    "facing=west":  { "model": "arz_classes:block/carpenter_workbench", "y": 270 }
+  }
+}

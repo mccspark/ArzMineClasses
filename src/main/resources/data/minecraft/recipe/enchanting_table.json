@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " B ",
+    "A#A",
+    "###"
+  ],
+  "key": {
+    "B": "minecraft:book",
+    "A": "minecraft:amethyst_shard",
+    "#": "minecraft:smooth_basalt"
+  },
+  "result": { "id": "minecraft:enchanting_table", "count": 1 }
+}

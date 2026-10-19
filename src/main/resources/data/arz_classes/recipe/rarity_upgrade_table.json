@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GDG",
+    "OBO",
+    "OOO"
+  ],
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "D": "minecraft:diamond",
+    "B": "minecraft:book",
+    "O": "minecraft:obsidian"
+  },
+  "result": {
+    "id": "arz_classes:rarity_upgrade_table",
+    "count": 1
+  }
+}
