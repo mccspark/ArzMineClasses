@@ -37,6 +37,8 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.RING_GOLD);
                         output.accept(ModItems.RING_NETHERITE);
                         output.accept(ModItems.BONE_POUCH);
+                        output.accept(ModItems.FOOD_POUCH);
+                        output.accept(ModItems.HARVEST_BOOK);
                         output.accept(ModItems.GOLDEN_BEETROOT);
                         output.accept(ModItems.GOLDEN_CABBAGE);
                         output.accept(ModItems.GOLDEN_ONION);

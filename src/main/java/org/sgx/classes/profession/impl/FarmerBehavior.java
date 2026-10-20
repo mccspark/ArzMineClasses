@@ -28,6 +28,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.sgx.classes.attachment.ModAttachments;
+import org.sgx.classes.item.HarvestBookItem;
 import org.sgx.classes.item.ModItems;
 import org.sgx.classes.profession.ProfessionBehavior;
 import org.sgx.classes.profession.ProfessionData;
@@ -84,6 +85,7 @@ public final class FarmerBehavior implements ProfessionBehavior {
         }
 
         applyHarvestBonuses(player, world, pos, state, ModAttachments.get(player));
+        HarvestBookItem.recordCrop(player, block);
         return XP_PER_HARVEST;
     }
 
@@ -116,6 +118,7 @@ public final class FarmerBehavior implements ProfessionBehavior {
         }
 
         applyHarvestBonuses(serverPlayer, world, pos, state, data);
+        HarvestBookItem.recordCrop(serverPlayer, state.getBlock());
 
         world.setBlockAndUpdate(pos, crop.getStateForAge(0));
         world.playSound(null, pos, SoundEvents.CROP_PLANTED, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -151,6 +154,7 @@ public final class FarmerBehavior implements ProfessionBehavior {
                 float chance = (float) Math.min(0.5, rareChance / 100.0);
                 if (world.getRandom().nextFloat() < chance) {
                     dropStack(world, pos, new ItemStack(goldenVersion));
+                    HarvestBookItem.recordGolden(player, goldenVersion);
                 }
             }
         }

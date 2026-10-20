@@ -1,8 +1,6 @@
 package org.sgx.classes.client.gui;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.sgx.classes.item.ItemRarity;
@@ -69,18 +67,33 @@ public final class ModRecipeBook {
                     data -> data.hasAbility("farmer_bone_pouch"),
                     Component.translatable("recipe.arz_classes.bone_pouch.locked")
             ),
+            // food_pouch.json: SLS / L L / LLL  (S = нитка, L = кожа)
             new Entry(
-                    "rich_soil",
-                    Component.translatable("recipe.arz_classes.rich_soil"),
+                    "food_pouch",
+                    Component.translatable("recipe.arz_classes.food_pouch"),
                     new ItemStack[]{
-                            new ItemStack(Items.DIRT), new ItemStack(Items.DIRT), new ItemStack(Items.DIRT),
-                            new ItemStack(Items.DIRT), foreignItem("farmersdelight", "organic_compost", 1), new ItemStack(Items.DIRT),
-                            new ItemStack(Items.DIRT), new ItemStack(Items.DIRT), new ItemStack(Items.DIRT)
+                            new ItemStack(Items.STRING), new ItemStack(Items.LEATHER), new ItemStack(Items.STRING),
+                            new ItemStack(Items.LEATHER), ItemStack.EMPTY, new ItemStack(Items.LEATHER),
+                            new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER)
                     },
-                    foreignItem("farmersdelight", "rich_soil", 4),
+                    new ItemStack(ModItems.FOOD_POUCH),
                     ProfessionType.FARMER,
-                    data -> data.hasAbility("farmer_delight_plots"),
-                    Component.translatable("recipe.arz_classes.locked_farmer_delight_plots")
+                    data -> data.hasAbility("farmer_food_pouch"),
+                    Component.translatable("recipe.arz_classes.food_pouch.locked")
+            ),
+            // harvest_book.json: бесформенный — книга, пшеница, морковь, картофель
+            new Entry(
+                    "harvest_book",
+                    Component.translatable("recipe.arz_classes.harvest_book"),
+                    new ItemStack[]{
+                            new ItemStack(Items.BOOK), new ItemStack(Items.WHEAT), ItemStack.EMPTY,
+                            new ItemStack(Items.CARROT), new ItemStack(Items.POTATO), ItemStack.EMPTY,
+                            ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY
+                    },
+                    new ItemStack(ModItems.HARVEST_BOOK),
+                    ProfessionType.FARMER,
+                    data -> true,
+                    Component.empty()
             ),
             // ring_iron.json: IFI / F F / IFI  (I = железо, F = фрагмент RARE)
             new Entry(
@@ -191,14 +204,6 @@ public final class ModRecipeBook {
                     Component.empty()
             )
     );
-
-    private static ItemStack foreignItem(String namespace, String path, int count) {
-        Identifier id = Identifier.fromNamespaceAndPath(namespace, path);
-        return BuiltInRegistries.ITEM.get(id)
-                .map(holder -> new ItemStack(holder, count))
-                .orElse(ItemStack.EMPTY);
-    }
-
 
     private ModRecipeBook() {
     }

@@ -33,8 +33,13 @@ public class Arz_classesClient implements ClientModInitializer {
         RingTooltip.init();
         BonePouchTooltip.init();
         BonePouchHint.register();
+        FoodPouchTooltip.init();
+        HarvestBookTooltip.init();
+        org.sgx.classes.item.HarvestBookItem.clientOpener = hand ->
+                net.minecraft.client.Minecraft.getInstance().gui.setScreen(new HarvestBookScreen(hand));
         MealStarsTooltip.init();
         MenuScreens.register(ModMenus.BONE_POUCH, BonePouchScreen::new);
+        MenuScreens.register(ModMenus.FOOD_POUCH, FoodPouchScreen::new);
         MenuScreens.register(ModMenus.RARITY_UPGRADE_TABLE, RarityUpgradeTableScreen::new);
         MenuScreens.register(ModMenus.CARPENTER_WORKBENCH, CarpenterWorkbenchScreen::new);
 

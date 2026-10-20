@@ -26,5 +26,6 @@ public final class BonePouchScreen extends AbstractContainerScreen<BonePouchMenu
     @Override
     protected void extractLabels(GuiGraphicsExtractor graphics, int xm, int ym) {
         super.extractLabels(graphics, xm, ym);
+        this.titleLabelY = 18;
     }
 }

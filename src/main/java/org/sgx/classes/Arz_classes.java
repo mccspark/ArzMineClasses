@@ -14,6 +14,7 @@ import org.sgx.classes.block.chest.ModChests;
 import org.sgx.classes.command.ProfessionCommand;
 import org.sgx.classes.event.*;
 import org.sgx.classes.item.BonePouchItem;
+import org.sgx.classes.item.FoodPouchItem;
 import org.sgx.classes.item.ModBlocks;
 import org.sgx.classes.item.ModCreativeTabs;
 import org.sgx.classes.item.ModItems;
@@ -59,6 +60,8 @@ public class Arz_classes implements ModInitializer {
 		MinerHelmetLight.init();
 		SharpeningTrigger.init();
 		BonePouchItem.register();
+		FoodPouchItem.register();
+		org.sgx.classes.item.HarvestBookItem.register();
 		ModCreativeTabs.init();
 		SkillUnlockEvents.init();
 		HammerArmorGuard.init();

@@ -112,6 +112,7 @@ public final class RecipeBookScreen extends Screen {
         int gridTop = top + 40;
         int cell = 18;
 
+        ItemStack hovered = ItemStack.EMPTY;
         for (int i = 0; i < 9; i++) {
             int col = i % 3;
             int row = i / 3;
@@ -122,6 +123,9 @@ public final class RecipeBookScreen extends Screen {
             ItemStack stack = current.grid()[i];
             if (!stack.isEmpty()) {
                 graphics.item(stack, x, y);
+                if (mouseX >= x && mouseX < x + 16 && mouseY >= y && mouseY < y + 16) {
+                    hovered = stack;
+                }
             }
         }
 
@@ -132,9 +136,18 @@ public final class RecipeBookScreen extends Screen {
 
         if (unlocked) {
             graphics.item(current.result(), resultX, resultY);
+            if (!current.result().isEmpty()
+                    && mouseX >= resultX && mouseX < resultX + 16 && mouseY >= resultY && mouseY < resultY + 16) {
+                hovered = current.result();
+            }
         } else {
             graphics.fill(resultX, resultY, resultX + 16, resultY + 16, 0x80000000);
             graphics.outline(resultX, resultY, 16, 16, 0xFFAA5555);
+        }
+
+        // подсказка: что за предмет под курсором (ингредиент или результат)
+        if (!hovered.isEmpty()) {
+            graphics.setTooltipForNextFrame(this.font, hovered, mouseX, mouseY);
         }
 
         if (!unlocked) {

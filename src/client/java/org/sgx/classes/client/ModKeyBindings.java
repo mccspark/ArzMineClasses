@@ -7,6 +7,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 import org.sgx.classes.Arz_classes;
 import org.sgx.classes.client.gui.ClassesScreen;
+import org.sgx.classes.client.gui.HarvestBookScreen;
 
 public final class ModKeyBindings {
 
@@ -23,6 +24,16 @@ public final class ModKeyBindings {
             )
     );
 
+    /** Открыть книгу урожая (из слота Trinkets или инвентаря). Клавиша меняется в настройках управления. */
+    public static final KeyMapping OPEN_HARVEST_BOOK = KeyMappingHelper.registerKeyMapping(
+            new KeyMapping(
+                    "key.arz_classes.open_harvest_book",
+                    InputConstants.Type.KEYSYM,
+                    InputConstants.KEY_H,
+                    CATEGORY
+            )
+    );
+
     public static void init() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player == null) {
@@ -32,6 +43,10 @@ public final class ModKeyBindings {
             // while + consumeClick, чтобы не терять быстрые нажатия
             while (OPEN_CLASSES.consumeClick()) {
                 client.gui.setScreen(new ClassesScreen(null));
+            }
+
+            while (OPEN_HARVEST_BOOK.consumeClick()) {
+                HarvestBookScreen.openFromKey(client);
             }
 
         });

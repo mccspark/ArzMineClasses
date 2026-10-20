@@ -11,7 +11,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import org.sgx.classes.Arz_classes;
 
+import io.netty.buffer.ByteBuf;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public final class ModDataComponents {
 
@@ -59,6 +63,27 @@ public final class ModDataComponents {
             DataComponentType.<Integer>builder()
                     .persistent(Codec.INT)
                     .networkSynchronized(ByteBufCodecs.VAR_INT)
+                    .build());
+
+    /** Книга урожая: UUID и ник первого открывшего + счётчики ("crop:<блок>" / "gold:<предмет>"). */
+    public static final DataComponentType<String> HARVEST_OWNER_ID = register(
+            "harvest_owner_id",
+            DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
+    public static final DataComponentType<String> HARVEST_OWNER_NAME = register(
+            "harvest_owner_name",
+            DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
+    public static final DataComponentType<Map<String, Integer>> HARVEST_STATS = register(
+            "harvest_stats",
+            DataComponentType.<Map<String, Integer>>builder()
+                    .persistent(Codec.unboundedMap(Codec.STRING, Codec.INT))
+                    .networkSynchronized(ByteBufCodecs.<ByteBuf, String, Integer, Map<String, Integer>>map(
+                            size -> new HashMap<>(), ByteBufCodecs.STRING_UTF8, ByteBufCodecs.VAR_INT))
                     .build());
 
     private ModDataComponents() {

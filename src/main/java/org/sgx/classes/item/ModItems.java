@@ -128,6 +128,24 @@ public final class ModItems {
                     .stacksTo(1)
                     .setId(BONE_POUCH_KEY));
 
+    private static final ResourceKey<Item> FOOD_POUCH_KEY =
+            ResourceKey.create(Registries.ITEM, Arz_classes.id("food_pouch"));
+
+    public static final Item FOOD_POUCH = new FoodPouchItem(
+            new Item.Properties()
+                    .stacksTo(1)
+                    .setId(FOOD_POUCH_KEY));
+
+    private static final ResourceKey<Item> HARVEST_BOOK_KEY =
+            ResourceKey.create(Registries.ITEM, Arz_classes.id("harvest_book"));
+
+    public static final Item HARVEST_BOOK = new HarvestBookItem(
+            new Item.Properties()
+                    .stacksTo(1)
+                    .setId(HARVEST_BOOK_KEY)
+                    .component(TrinketDataComponents.EQUIPMENT,
+                            TrinketEquippable.DEFAULT.withSlots(HarvestBookItem.TRINKET_SLOT)));
+
     private static final ResourceKey<Item> RING_IRON_KEY =
             ResourceKey.create(Registries.ITEM, Arz_classes.id("ring_iron"));
     private static final ResourceKey<Item> RING_GOLD_KEY =
@@ -274,6 +292,8 @@ public final class ModItems {
         Registry.register(BuiltInRegistries.ITEM, RING_GOLD_KEY, RING_GOLD);
         Registry.register(BuiltInRegistries.ITEM, RING_NETHERITE_KEY, RING_NETHERITE);
         Registry.register(BuiltInRegistries.ITEM, BONE_POUCH_KEY, BONE_POUCH);
+        Registry.register(BuiltInRegistries.ITEM, FOOD_POUCH_KEY, FOOD_POUCH);
+        Registry.register(BuiltInRegistries.ITEM, HARVEST_BOOK_KEY, HARVEST_BOOK);
         Registry.register(BuiltInRegistries.ITEM, GOLDEN_BEETROOT_KEY, GOLDEN_BEETROOT);
         Registry.register(BuiltInRegistries.ITEM, GOLDEN_CABBAGE_KEY, GOLDEN_CABBAGE);
         Registry.register(BuiltInRegistries.ITEM, GOLDEN_ONION_KEY, GOLDEN_ONION);

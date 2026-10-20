@@ -60,25 +60,40 @@ public abstract class CraftingResultSlotMixin {
         }
     }
 
-    /** Улучшенная почва Farmer's Delight: нужен навык "farmer_delight_plots". */
+    /** Мешочек для еды: крафтит только тот, у кого открыт навык "farmer_food_pouch" (7 уровень Фермера). */
     @Inject(method = "mayPickup", at = @At("HEAD"), cancellable = true)
-    private void arzClasses$blockUnqualifiedRichSoil(Player player, CallbackInfoReturnable<Boolean> cir) {
+    private void arzClasses$blockUnqualifiedFoodPouch(Player player, CallbackInfoReturnable<Boolean> cir) {
         Slot self = (Slot) (Object) this;
         if (!(self instanceof ResultSlot)) {
             return;
         }
         ItemStack result = self.getItem();
-        if (result.isEmpty()) {
-            return;
-        }
-        Identifier id = BuiltInRegistries.ITEM.getKey(result.getItem());
-        if (!id.getNamespace().equals("farmersdelight") || !id.getPath().equals("rich_soil")) {
+        if (result.isEmpty() || !result.is(ModItems.FOOD_POUCH)) {
             return;
         }
         if (!(player instanceof ServerPlayer serverPlayer)) {
             return;
         }
-        if (!ModAttachments.get(serverPlayer).hasAbility("farmer_delight_plots")) {
+        if (!ModAttachments.get(serverPlayer).hasAbility("farmer_food_pouch")) {
+            cir.setReturnValue(false);
+        }
+    }
+
+    /** Книга урожая: крафтит только Фермер. */
+    @Inject(method = "mayPickup", at = @At("HEAD"), cancellable = true)
+    private void arzClasses$blockNonFarmerHarvestBook(Player player, CallbackInfoReturnable<Boolean> cir) {
+        Slot self = (Slot) (Object) this;
+        if (!(self instanceof ResultSlot)) {
+            return;
+        }
+        ItemStack result = self.getItem();
+        if (result.isEmpty() || !result.is(ModItems.HARVEST_BOOK)) {
+            return;
+        }
+        if (!(player instanceof ServerPlayer serverPlayer)) {
+            return;
+        }
+        if (ModAttachments.get(serverPlayer).currentProfession() != ProfessionType.FARMER) {
             cir.setReturnValue(false);
         }
     }

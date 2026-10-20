@@ -26,6 +26,7 @@ public final class SkillIcons {
     private static final Identifier FARMER_IMPROVED_FARM = sprite("skill/farmer/improved_farm");
     private static final Identifier FARMER_MEAL = sprite("skill/farmer/meal");
     private static final Identifier FARMER_MEAL_BAG = sprite("skill/farmer/meal_bag");
+    private static final Identifier FARMER_FOOD_BAG = sprite("skill/farmer/food_bag");
     private static final Identifier FARMER_MEAT_MULTIPLIER = sprite("skill/farmer/meat_multiplier");
     private static final Identifier FARMER_ICON_COOK = sprite("skill/farmer/icon_cook");
     private static final Identifier FARMER_MEAL_BAG_UPGRADE = sprite("skill/farmer/meal_bag_upgrade");
@@ -137,8 +138,11 @@ public final class SkillIcons {
         if (id.startsWith("farmer_bone_pouch_unlock")) {
             return FARMER_MEAL_BAG; // открывает крафт костного мешочка
         }
-        if (id.startsWith("farmer_farmdelight_growing") || id.startsWith("farmer_delight_plots")) {
-            return FARMER_IMPROVED_FARM; // грядки/фарм-делайт связанные милстоуны
+        if (id.startsWith("farmer_food_pouch")) {
+            return FARMER_FOOD_BAG; // мешочек для еды
+        }
+        if (id.startsWith("farmer_farmdelight_growing")) {
+            return FARMER_IMPROVED_FARM; // фарм-делайт связанные милстоуны
         }
         if (id.startsWith("farmer_rare_crop_drop")) {
             return RARE_DROP;

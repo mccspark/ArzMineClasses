@@ -30,7 +30,7 @@ public final class SkillTrees {
                 .scalar("farmer_rare_crop_drop", 1, "farmer.rare_crop_drop_chance_percent", 1.0, "skill.arz_classes.farmer_rare_crop_drop")
                 .scalarAndMilestone("farmer_bone_pouch_unlock", "farmer.bone_pouch_range", 1.0,
                         "farmer_bone_pouch", "skill.arz_classes.farmer_bone_pouch")
-                .milestone("farmer_delight_plots", "farmer_delight_plots", "skill.arz_classes.farmer_delight_plots")
+                .milestone("farmer_food_pouch", "farmer_food_pouch", "skill.arz_classes.farmer_food_pouch")
                 .scalar("farmer_animal_yield", 1, "farmer.animal_kill_drop_percent", 4.0, "skill.arz_classes.farmer_animal_yield")
                 .scalar("farmer_crop_yield", 1, "farmer.crop_yield_percent", 2.0, "skill.arz_classes.farmer_crop_yield")
                 .build(10));
