@@ -101,6 +101,7 @@ public final class ProfessionNetworking {
                     data.setCurrentProfession(payload.profession());
                     SkillAttributeSync.reapply(player, data);
                     LuckPermsIntegration.syncGroup(player, data);
+                    org.sgx.classes.profession.ClassAdvancements.sync(player, data);
                     syncToClient(player);
                     ClassStats.refresh(context.server(), player); // сразу обновить статистику классов
                 }));

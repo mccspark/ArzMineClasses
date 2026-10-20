@@ -80,12 +80,18 @@ public final class FarmerBehavior implements ProfessionBehavior {
     @Override
     public int onBlockBroken(ServerPlayer player, ServerLevel world, BlockPos pos, BlockState state) {
         Block block = state.getBlock();
+        if (block == Blocks.BROWN_MUSHROOM || block == Blocks.RED_MUSHROOM) {
+            // обычные грибы: только в счётчик книги, опыта не даём
+            HarvestBookItem.recordCrop(player, block);
+            return 0;
+        }
         if (!(block instanceof CropBlock crop) || !crop.isMaxAge(state)) {
             return 0;
         }
 
         applyHarvestBonuses(player, world, pos, state, ModAttachments.get(player));
         HarvestBookItem.recordCrop(player, block);
+        HarvestBookItem.recordNearbyDrops(player, world, pos);
         return XP_PER_HARVEST;
     }
 
@@ -119,6 +125,7 @@ public final class FarmerBehavior implements ProfessionBehavior {
 
         applyHarvestBonuses(serverPlayer, world, pos, state, data);
         HarvestBookItem.recordCrop(serverPlayer, state.getBlock());
+        HarvestBookItem.recordNearbyDrops(serverPlayer, world, pos);
 
         world.setBlockAndUpdate(pos, crop.getStateForAge(0));
         world.playSound(null, pos, SoundEvents.CROP_PLANTED, SoundSource.BLOCKS, 1.0f, 1.0f);

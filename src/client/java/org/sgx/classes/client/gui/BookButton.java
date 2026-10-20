@@ -35,11 +35,11 @@ public class BookButton extends AbstractWidget {
 
     @Override
     protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
-        boolean hovered = this.isHovered();
+        boolean hovered = this.isHovered() && this.active;
         int x = getX();
         int y = getY();
 
-        graphics.fill(x, y, x + width, y + height, hovered ? LEATHER_HOVER : LEATHER);
+        graphics.fill(x, y, x + width, y + height, !this.active ? LEATHER_PRESSED : (hovered ? LEATHER_HOVER : LEATHER));
         // фаска: светлый верх, тёмный низ
         graphics.fill(x + 1, y + 1, x + width - 1, y + 2, HIGHLIGHT);
         graphics.fill(x + 1, y + height - 2, x + width - 1, y + height - 1, LEATHER_PRESSED);
@@ -56,7 +56,7 @@ public class BookButton extends AbstractWidget {
         var font = Minecraft.getInstance().font;
         Component label = this.getMessage();
         graphics.text(font, label, x + (width - font.width(label)) / 2, y + (height - 8) / 2 + 1,
-                hovered ? TEXT_HOVER : TEXT, false);
+                !this.active ? 0xFF7A6A52 : (hovered ? TEXT_HOVER : TEXT), false);
     }
 
     @Override

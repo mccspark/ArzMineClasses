@@ -32,6 +32,8 @@ public final class FarmerAnimalKillEvents {
             if (!(damageSource.getEntity() instanceof ServerPlayer player)) {
                 return;
             }
+            // книга урожая считает убийства мирных мобов независимо от текущего класса
+            org.sgx.classes.item.HarvestBookItem.recordKill(player, animal.getType());
             ProfessionType active = ModAttachments.get(player).currentProfession();
             ProfessionBehavior behavior = BEHAVIORS.get(active);
             if (behavior != null) {

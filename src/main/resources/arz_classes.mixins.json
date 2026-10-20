@@ -21,7 +21,8 @@
 		"FurnaceFirewoodQuickMoveMixin",
 		"BowItemMixin",
 		"CrossbowItemMixin",
-		"BlockBehaviourDestroyProgressMixin"
+		"BlockBehaviourDestroyProgressMixin",
+		"AnimalBreedMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "id": "arz_classes:knowledge_scroll"
+    },
+    "title": {
+      "translate": "advancement.arz_classes.choose_class.title"
+    },
+    "description": {
+      "translate": "advancement.arz_classes.choose_class.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "arz_classes:root",
+  "criteria": {
+    "chosen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

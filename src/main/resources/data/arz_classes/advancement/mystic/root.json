@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "id": "arz_classes:knowledge_scroll"
+    },
+    "title": {
+      "translate": "advancement.arz_classes.mystic.root.title"
+    },
+    "description": {
+      "translate": "advancement.arz_classes.mystic.root.desc"
+    },
+    "background": "minecraft:gui/advancements/backgrounds/end",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": true
+  },
+  "criteria": {
+    "chosen": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -268,6 +268,7 @@ public final class ProfessionCommand {
                 data.setCurrentProfession(type);
                 applyAndSync(target, data);
                 LuckPermsIntegration.syncGroup(target, data); // так же, как при выборе класса через GUI
+                org.sgx.classes.profession.ClassAdvancements.sync(target, data);
 
                 String targetName = profile.name();
                 source.sendSuccess(() -> successLine(targetName + ": класс изменён на " + type.getSerializedName()), true);

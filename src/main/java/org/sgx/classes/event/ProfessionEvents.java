@@ -180,6 +180,7 @@ public final class ProfessionEvents {
             ProfessionData data = ModAttachments.get(player);
             SkillAttributeSync.reapply(player, data);
             LuckPermsIntegration.syncGroup(player, data);
+            org.sgx.classes.profession.ClassAdvancements.sync(player, data);
             ProfessionNetworking.syncToClient(player);
         });
     }
@@ -206,6 +207,7 @@ public final class ProfessionEvents {
             if (current < lastCount) {
                 int cuts = lastCount - current;
                 for (int i = 0; i < cuts; i++) {
+                    HarvestBookItem.record(player, "crop:farmersdelight:rice");
                     if (world.getRandom().nextFloat() < chance) {
                         ItemEntity goldenRice = new ItemEntity(world,
                                 pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
