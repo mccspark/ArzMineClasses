@@ -33,6 +33,9 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.ADMIN_KNOCKBACK_STICK);
                         output.accept(ModBlocks.RARITY_UPGRADE_TABLE_ITEM);
                         output.accept(ModBlocks.CARPENTER_WORKBENCH_ITEM);
+                        for (var rack : org.sgx.classes.block.ModWeaponRacks.allItems()) {
+                            output.accept(rack);
+                        }
                         output.accept(ModItems.RING_IRON);
                         output.accept(ModItems.RING_GOLD);
                         output.accept(ModItems.RING_NETHERITE);

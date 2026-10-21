@@ -3,6 +3,7 @@ package org.sgx.classes.block;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import org.sgx.classes.block.chest.ModChests;
 
@@ -35,6 +36,14 @@ public record CarpenterRecipe(List<Input> inputs, ItemStack result) {
                 list.add(new CarpenterRecipe(
                         List.of(Input.of(ModChests.planksFor(wood), 8)),
                         new ItemStack(ModChests.chestItem(wood), 1)));
+            }
+            // Оружейные стойки: 6 досок нужной породы + 4 палки + 1 железный слиток
+            for (String wood : ModChests.WOODS) {
+                list.add(new CarpenterRecipe(
+                        List.of(Input.of(ModChests.planksFor(wood), 6),
+                                Input.of(Items.STICK, 4),
+                                Input.of(Items.IRON_INGOT, 1)),
+                        new ItemStack(ModWeaponRacks.item(wood), 1)));
             }
             return List.copyOf(list);
         }

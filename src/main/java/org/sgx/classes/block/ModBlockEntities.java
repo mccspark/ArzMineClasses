@@ -24,11 +24,18 @@ public final class ModBlockEntities {
     public static final BlockEntityType<CarpenterWorkbenchEntity> CARPENTER_WORKBENCH =
             new BlockEntityType<>(CarpenterWorkbenchEntity::new, Set.of(ModBlocks.CARPENTER_WORKBENCH));
 
+    private static final ResourceKey<BlockEntityType<?>> WEAPON_RACK_KEY =
+            ResourceKey.create(Registries.BLOCK_ENTITY_TYPE, Arz_classes.id("weapon_rack"));
+
+    public static final BlockEntityType<WeaponRackBlockEntity> WEAPON_RACK =
+            new BlockEntityType<>(WeaponRackBlockEntity::new, Set.copyOf(ModWeaponRacks.blocks()));
+
     private ModBlockEntities() {
     }
 
     public static void init() {
         Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, RARITY_UPGRADE_TABLE_KEY, RARITY_UPGRADE_TABLE);
         Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, CARPENTER_WORKBENCH_KEY, CARPENTER_WORKBENCH);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, WEAPON_RACK_KEY, WEAPON_RACK);
     }
 }

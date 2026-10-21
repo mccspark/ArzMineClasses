@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "arz_classes:block/jungle_weapon_rack" },
+    "facing=east":  { "model": "arz_classes:block/jungle_weapon_rack", "y": 90 },
+    "facing=south": { "model": "arz_classes:block/jungle_weapon_rack", "y": 180 },
+    "facing=west":  { "model": "arz_classes:block/jungle_weapon_rack", "y": 270 }
+  }
+}

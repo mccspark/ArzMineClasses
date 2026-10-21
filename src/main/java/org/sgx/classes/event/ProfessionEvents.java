@@ -139,17 +139,18 @@ public final class ProfessionEvents {
                 if (!blockUseSkipped && data.currentProfession() == ProfessionType.FARMER) {
                     ProfessionFeedback.grantXp(serverPlayer, ProfessionType.FARMER,
                             withRingBonus(serverPlayer, FarmerBehavior.XP_PER_HARVEST));
+
                     HarvestBookItem.recordCrop(serverPlayer, block);
 
                     double rareChance = data.customScalarTotal("farmer.rare_crop_drop_chance_percent");
                     if (rareChance > 0) {
                         float chance = (float) Math.min(0.5, rareChance / 100.0);
                         if (world.getRandom().nextFloat() < chance) {
+                            HarvestBookItem.recordGolden(serverPlayer, ModItems.GOLDEN_TOMATO);
                             ItemEntity goldenTomato = new ItemEntity((ServerLevel) world,
                                     pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                                     new ItemStack(ModItems.GOLDEN_TOMATO));
                             world.addFreshEntity(goldenTomato);
-                            HarvestBookItem.recordGolden(serverPlayer, ModItems.GOLDEN_TOMATO);
                         }
                     }
                 }
@@ -167,7 +168,7 @@ public final class ProfessionEvents {
                         // достижимо только 1% (главная цепочка), ветка подкласса позже
                         // добавит ещё +1% к тому же customScalarTotal, доведя до потолка
                         float chance = (float) Math.min(0.02, rareChance / 100.0);
-                        pollForRiceCut(serverLevel, serverPlayer, pos, countBefore, 0, chance);
+                        pollForRiceCut(serverLevel, pos, countBefore, 0, chance);
                     }
                 }
             }
@@ -180,7 +181,6 @@ public final class ProfessionEvents {
             ProfessionData data = ModAttachments.get(player);
             SkillAttributeSync.reapply(player, data);
             LuckPermsIntegration.syncGroup(player, data);
-            org.sgx.classes.profession.ClassAdvancements.sync(player, data);
             ProfessionNetworking.syncToClient(player);
         });
     }
@@ -201,25 +201,23 @@ public final class ProfessionEvents {
 
     /** Опрашивает count на доске несколько тиков подряд (до 20 = ~1 сек) — разрез
      * на разделочной доске Farmer's Delight происходит не мгновенно в тот же тик. */
-    private static void pollForRiceCut(ServerLevel world, ServerPlayer player, BlockPos pos, int lastCount, int ticksWaited, float chance) {
+    private static void pollForRiceCut(ServerLevel world, BlockPos pos, int lastCount, int ticksWaited, float chance) {
         world.getServer().execute(() -> {
             int current = getRicePanicleCount(world, pos);
             if (current < lastCount) {
                 int cuts = lastCount - current;
                 for (int i = 0; i < cuts; i++) {
-                    HarvestBookItem.record(player, "crop:farmersdelight:rice");
                     if (world.getRandom().nextFloat() < chance) {
                         ItemEntity goldenRice = new ItemEntity(world,
                                 pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5,
                                 new ItemStack(ModItems.GOLDEN_RICE));
                         world.addFreshEntity(goldenRice);
-                        HarvestBookItem.recordGolden(player, ModItems.GOLDEN_RICE);
                     }
                 }
                 return;
             }
             if (ticksWaited < 20) {
-                pollForRiceCut(world, player, pos, current, ticksWaited + 1, chance);
+                pollForRiceCut(world, pos, current, ticksWaited + 1, chance);
             }
         });
     }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "conditions": [
+        { "condition": "minecraft:survives_explosion" }
+      ],
+      "entries": [
+        { "type": "minecraft:item", "name": "arz_classes:dark_oak_weapon_rack" }
+      ]
+    }
+  ],
+  "random_sequence": "arz_classes:blocks/dark_oak_weapon_rack"
+}

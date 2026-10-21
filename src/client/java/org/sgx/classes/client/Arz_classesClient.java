@@ -50,6 +50,10 @@ public class Arz_classesClient implements ClientModInitializer {
                 org.sgx.classes.block.chest.ModChests.TRAPPED_CHEST_ENTITY,
                 org.sgx.classes.client.chest.WoodChestRenderer::new);
 
+        net.minecraft.client.renderer.blockentity.BlockEntityRenderers.register(
+                org.sgx.classes.block.ModBlockEntities.WEAPON_RACK,
+                org.sgx.classes.client.rack.WeaponRackRenderer::new);
+
         ClientPlayNetworking.registerGlobalReceiver(OpenSharpeningPayload.TYPE, (payload, context) ->
                 context.client().execute(() -> context.client().gui.setScreen(new SharpeningScreen(
                         payload.center(), payload.brightWidth(), payload.greenWidth(),

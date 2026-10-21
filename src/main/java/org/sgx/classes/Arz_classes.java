@@ -45,6 +45,7 @@ public class Arz_classes implements ModInitializer {
 		ProfessionNetworking.registerCommon();
 		RarityUpgradeNetworking.registerCommon();
 		ModBlocks.init();
+		org.sgx.classes.block.ModWeaponRacks.init();
 		ProfessionRespawnCopy.init();
 		ModBlockEntities.init();
 		ModChests.init();
