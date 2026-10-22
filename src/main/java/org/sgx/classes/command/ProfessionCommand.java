@@ -127,6 +127,9 @@ public final class ProfessionCommand {
                                         .then(argument("amount", IntegerArgumentType.integer(1))
                                                 .executes(ctx -> changeXp(ctx, false))))))
 
+                // /profession fixdurability players | area <радиус> | stop — админ: срезать раздутую прочность
+                .then(DurabilityFixCommand.node())
+
                 // /profession boosters — админ: все активные бустеры (глобальный и личные)
                 .then(literal("boosters")
                         .requires(IS_ADMIN)

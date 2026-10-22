@@ -25,7 +25,8 @@
 		"AnimalBreedMixin",
 		"ClassBookAnvilMixin",
 		"ClassBookXpMixin",
-		"MinerHelmetNoBreakMixin"
+		"MinerHelmetNoBreakMixin",
+		"InventoryMenuMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

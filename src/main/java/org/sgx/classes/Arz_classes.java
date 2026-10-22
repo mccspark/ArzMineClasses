@@ -13,6 +13,7 @@ import org.sgx.classes.block.ModGlassDoors;
 import org.sgx.classes.block.ModMenus;
 import org.sgx.classes.block.ModWeaponRacks;
 import org.sgx.classes.block.chest.ModChests;
+import org.sgx.classes.command.DurabilityFixCommand;
 import org.sgx.classes.command.ProfessionCommand;
 import org.sgx.classes.event.*;
 import org.sgx.classes.item.BonePouchItem;
@@ -72,6 +73,7 @@ public class Arz_classes implements ModInitializer {
 		SkillUnlockEvents.init();
 		HammerArmorGuard.init();
 		FishingRodRepair.init();
+		DurabilityFixCommand.init();
 		EnchantFullPreviewPayload.registerCommon();
 		DiamondShardCrafting.init();
 		FarmerAnimalKillEvents.registerBehavior(new org.sgx.classes.profession.impl.FarmerBehavior());

@@ -27,6 +27,11 @@ public final class RarityCraftHandler {
         if (!isEligible(stack)) {
             return null;
         }
+        // Объединение двух одинаковых предметов — не новый крафт: редкость не бросаем и бонусы
+        // прочности повторно не накладываем (иначе максимум прочности рос с каждым объединением).
+        if (RepairMerge.tryMerge(player, stack)) {
+            return null;
+        }
         ProfessionData data = ModAttachments.get(player);
         List<RarityWeights.Weight> weights = RarityWeights.compute(data);
         ItemRarity result = RarityRoller.roll(weights);
