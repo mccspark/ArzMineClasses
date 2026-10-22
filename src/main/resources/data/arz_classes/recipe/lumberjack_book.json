@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:book",
+    "minecraft:oak_log",
+    "minecraft:stick",
+    "minecraft:apple"
+  ],
+  "result": {
+    "id": "arz_classes:lumberjack_book",
+    "count": 1
+  }
+}

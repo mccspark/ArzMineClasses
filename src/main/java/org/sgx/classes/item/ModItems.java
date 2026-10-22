@@ -56,6 +56,25 @@ public final class ModItems {
             ResourceKey.create(Registries.ITEM, Arz_classes.id("coil"));
     private static final ResourceKey<Item> MINER_HELMET_KEY =
             ResourceKey.create(Registries.ITEM, Arz_classes.id("miner_helmet"));
+    private static final ResourceKey<Item> HELMET_BULB_KEY =
+            ResourceKey.create(Registries.ITEM, Arz_classes.id("helmet_bulb"));
+    private static final ResourceKey<Item> MINER_HELMET_OFF_KEY =
+            ResourceKey.create(Registries.ITEM, Arz_classes.id("miner_helmet_off"));
+
+
+    public static final Item HELMET_BULB = new HelmetBulbItem(
+            new Item.Properties().setId(HELMET_BULB_KEY));
+    public static final Item MINER_HELMET_OFF = new Item(
+            new Item.Properties()
+                    .durability(100)
+                    .setId(MINER_HELMET_OFF_KEY)
+                    .component(DataComponents.EQUIPPABLE,
+                            Equippable.builder(EquipmentSlot.HEAD)
+                                    .setEquipSound(SoundEvents.ARMOR_EQUIP_IRON)
+                                    .setAsset(ResourceKey.create(EquipmentAssets.ROOT_ID, Arz_classes.id("miner_helmet")))
+                                    .build()));
+
+
 
     public static final Item KNOWLEDGE_SCROLL = new org.sgx.classes.item.KnowledgeScrollItem(
             new Item.Properties()
@@ -145,6 +164,30 @@ public final class ModItems {
                     .setId(HARVEST_BOOK_KEY)
                     .component(TrinketDataComponents.EQUIPMENT,
                             TrinketEquippable.DEFAULT.withSlots(HarvestBookItem.TRINKET_SLOT)));
+
+    private static ResourceKey<Item> bookKey(String id) {
+        return ResourceKey.create(Registries.ITEM, Arz_classes.id(id));
+    }
+
+    private static Item classBook(ResourceKey<Item> key, BookKind kind) {
+        return new ClassBookItem(
+                new Item.Properties()
+                        .stacksTo(1)
+                        .setId(key)
+                        .component(TrinketDataComponents.EQUIPMENT,
+                                TrinketEquippable.DEFAULT.withSlots(ClassBookItem.TRINKET_SLOT)),
+                kind);
+    }
+
+    private static final ResourceKey<Item> BLACKSMITH_BOOK_KEY = bookKey("blacksmith_book");
+    private static final ResourceKey<Item> MYSTIC_BOOK_KEY = bookKey("mystic_book");
+    private static final ResourceKey<Item> MINER_BOOK_KEY = bookKey("miner_book");
+    private static final ResourceKey<Item> LUMBERJACK_BOOK_KEY = bookKey("lumberjack_book");
+
+    public static final Item BLACKSMITH_BOOK = classBook(BLACKSMITH_BOOK_KEY, BookKind.BLACKSMITH);
+    public static final Item MYSTIC_BOOK = classBook(MYSTIC_BOOK_KEY, BookKind.MYSTIC);
+    public static final Item MINER_BOOK = classBook(MINER_BOOK_KEY, BookKind.MINER);
+    public static final Item LUMBERJACK_BOOK = classBook(LUMBERJACK_BOOK_KEY, BookKind.LUMBERJACK);
 
     private static final ResourceKey<Item> RING_IRON_KEY =
             ResourceKey.create(Registries.ITEM, Arz_classes.id("ring_iron"));
@@ -286,6 +329,8 @@ public final class ModItems {
         Registry.register(BuiltInRegistries.ITEM, FIREWOOD_KEY, FIREWOOD);
         Registry.register(BuiltInRegistries.ITEM, COIL_KEY, COIL);
         Registry.register(BuiltInRegistries.ITEM, MINER_HELMET_KEY, MINER_HELMET);
+        Registry.register(BuiltInRegistries.ITEM, HELMET_BULB_KEY, HELMET_BULB);
+        Registry.register(BuiltInRegistries.ITEM, MINER_HELMET_OFF_KEY, MINER_HELMET_OFF);
         Registry.register(BuiltInRegistries.ITEM, ADMIN_DAMAGE_STICK_KEY, ADMIN_DAMAGE_STICK);
         Registry.register(BuiltInRegistries.ITEM, ADMIN_KNOCKBACK_STICK_KEY, ADMIN_KNOCKBACK_STICK);
         Registry.register(BuiltInRegistries.ITEM, RING_IRON_KEY, RING_IRON);
@@ -294,6 +339,10 @@ public final class ModItems {
         Registry.register(BuiltInRegistries.ITEM, BONE_POUCH_KEY, BONE_POUCH);
         Registry.register(BuiltInRegistries.ITEM, FOOD_POUCH_KEY, FOOD_POUCH);
         Registry.register(BuiltInRegistries.ITEM, HARVEST_BOOK_KEY, HARVEST_BOOK);
+        Registry.register(BuiltInRegistries.ITEM, BLACKSMITH_BOOK_KEY, BLACKSMITH_BOOK);
+        Registry.register(BuiltInRegistries.ITEM, MYSTIC_BOOK_KEY, MYSTIC_BOOK);
+        Registry.register(BuiltInRegistries.ITEM, MINER_BOOK_KEY, MINER_BOOK);
+        Registry.register(BuiltInRegistries.ITEM, LUMBERJACK_BOOK_KEY, LUMBERJACK_BOOK);
         Registry.register(BuiltInRegistries.ITEM, GOLDEN_BEETROOT_KEY, GOLDEN_BEETROOT);
         Registry.register(BuiltInRegistries.ITEM, GOLDEN_CABBAGE_KEY, GOLDEN_CABBAGE);
         Registry.register(BuiltInRegistries.ITEM, GOLDEN_ONION_KEY, GOLDEN_ONION);

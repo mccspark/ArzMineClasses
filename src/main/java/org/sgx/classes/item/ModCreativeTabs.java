@@ -36,12 +36,21 @@ public final class ModCreativeTabs {
                         for (var rack : org.sgx.classes.block.ModWeaponRacks.allItems()) {
                             output.accept(rack);
                         }
+                        for (var door : org.sgx.classes.block.ModGlassDoors.allItems()) {
+                            output.accept(door);
+                        }
                         output.accept(ModItems.RING_IRON);
                         output.accept(ModItems.RING_GOLD);
                         output.accept(ModItems.RING_NETHERITE);
+                        output.accept(ModItems.HELMET_BULB);
+                        output.accept(ModItems.MINER_HELMET_OFF);
                         output.accept(ModItems.BONE_POUCH);
                         output.accept(ModItems.FOOD_POUCH);
                         output.accept(ModItems.HARVEST_BOOK);
+                        output.accept(ModItems.MYSTIC_BOOK);
+                        output.accept(ModItems.BLACKSMITH_BOOK);
+                        output.accept(ModItems.LUMBERJACK_BOOK);
+                        output.accept(ModItems.MINER_BOOK);
                         output.accept(ModItems.GOLDEN_BEETROOT);
                         output.accept(ModItems.GOLDEN_CABBAGE);
                         output.accept(ModItems.GOLDEN_ONION);

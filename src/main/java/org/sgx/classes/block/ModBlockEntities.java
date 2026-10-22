@@ -4,6 +4,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.sgx.classes.Arz_classes;
 import org.sgx.classes.item.ModBlocks;
@@ -28,7 +29,12 @@ public final class ModBlockEntities {
             ResourceKey.create(Registries.BLOCK_ENTITY_TYPE, Arz_classes.id("weapon_rack"));
 
     public static final BlockEntityType<WeaponRackBlockEntity> WEAPON_RACK =
-            new BlockEntityType<>(WeaponRackBlockEntity::new, Set.copyOf(ModWeaponRacks.blocks()));
+            new BlockEntityType<>(WeaponRackBlockEntity::new, rackBlocks());
+
+    /** Стойки из всех пород дерева. */
+    private static Set<Block> rackBlocks() {
+        return Set.copyOf(ModWeaponRacks.blocks());
+    }
 
     private ModBlockEntities() {
     }

@@ -75,6 +75,10 @@ public final class RecipeBookScreen extends Screen {
     @Override
     public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractBackground(graphics, mouseX, mouseY, a);
+        if (BookStyle.enabled()) {
+            BookStyle.panel(graphics, left, top, PANEL_WIDTH, PANEL_HEIGHT);
+            return;
+        }
         graphics.fill(left, top, left + PANEL_WIDTH, top + PANEL_HEIGHT, 0xE0101010);
         graphics.outline(left, top, PANEL_WIDTH, PANEL_HEIGHT, 0xFFFFD46B);
     }
@@ -83,12 +87,12 @@ public final class RecipeBookScreen extends Screen {
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
 
-        graphics.centeredText(this.font, this.title, left + PANEL_WIDTH / 2, top + 6, 0xFFFFD46B);
+        graphics.centeredText(this.font, this.title, left + PANEL_WIDTH / 2, top + 8, BookStyle.title(0xFFFFD46B));
 
         if (entries.isEmpty()) {
             graphics.centeredText(this.font,
                     Component.translatable("screen.arz_classes.recipe_book_empty"),
-                    left + PANEL_WIDTH / 2, top + PANEL_HEIGHT / 2, 0xFF888888);
+                    left + PANEL_WIDTH / 2, top + PANEL_HEIGHT / 2, BookStyle.dim(0xFF888888));
             return;
         }
 
@@ -99,10 +103,10 @@ public final class RecipeBookScreen extends Screen {
             ModRecipeBook.Entry entry = entries.get(i);
             boolean unlocked = entry.unlocked().test(data);
             int rowY = listTop + i * ROW_HEIGHT;
-            int bg = i == selected ? 0xFF3A3620 : 0xFF201818;
-            graphics.fill(left + 8, rowY, left + 8 + LIST_WIDTH, rowY + ROW_HEIGHT - 2, bg);
-            graphics.outline(left + 8, rowY, LIST_WIDTH, ROW_HEIGHT - 2, i == selected ? 0xFFFFD46B : 0xFF3A3A3A);
-            int textColor = unlocked ? 0xFFFFFFFF : 0xFF777777;
+            boolean rowHovered = mouseX >= left + 8 && mouseX <= left + 8 + LIST_WIDTH
+                    && mouseY >= rowY && mouseY < rowY + ROW_HEIGHT - 2;
+            BookStyle.row(graphics, left + 8, rowY, LIST_WIDTH, ROW_HEIGHT - 2, i == selected, rowHovered);
+            int textColor = unlocked ? BookStyle.body(0xFFFFFFFF) : BookStyle.dim(0xFF777777);
             graphics.text(this.font, entry.name(), left + 12, rowY + 6, textColor);
         }
 
@@ -118,8 +122,12 @@ public final class RecipeBookScreen extends Screen {
             int row = i / 3;
             int x = gridLeft + col * cell;
             int y = gridTop + row * cell;
-            graphics.fill(x, y, x + 16, y + 16, 0xFF373737);
-            graphics.outline(x, y, 16, 16, 0xFF000000);
+            if (BookStyle.enabled()) {
+                BookStyle.slot(graphics, x - 1, y - 1);
+            } else {
+                graphics.fill(x, y, x + 16, y + 16, 0xFF373737);
+                graphics.outline(x, y, 16, 16, 0xFF000000);
+            }
             ItemStack stack = current.grid()[i];
             if (!stack.isEmpty()) {
                 graphics.item(stack, x, y);
@@ -132,7 +140,11 @@ public final class RecipeBookScreen extends Screen {
         int arrowX = gridLeft + cell * 3 + 6;
         int resultX = arrowX + 20;
         int resultY = gridTop + cell;
-        graphics.text(this.font, "->", arrowX, resultY + 4, 0xFFFFFFFF);
+        if (BookStyle.enabled()) {
+            BookStyle.arrow(graphics, arrowX, resultY + 4, BookStyle.body(0xFFFFFFFF));
+        } else {
+            graphics.text(this.font, "->", arrowX, resultY + 4, 0xFFFFFFFF);
+        }
 
         if (unlocked) {
             graphics.item(current.result(), resultX, resultY);

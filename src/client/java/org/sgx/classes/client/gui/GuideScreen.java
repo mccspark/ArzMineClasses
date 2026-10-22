@@ -363,7 +363,7 @@ public class GuideScreen extends Screen {
     @Override
     public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractBackground(graphics, mouseX, mouseY, a);
-        graphics.fill(left, top, left + panelW, top + panelH, 0xC0101010);
+        BookStyle.panel(graphics, left, top, panelW, panelH);
     }
 
     @Override
@@ -389,13 +389,13 @@ public class GuideScreen extends Screen {
                     int x = x0 + j * (row.w() + gap);
                     graphics.blitSprite(RenderPipelines.GUI_TEXTURED, row.images()[j], x, y, row.w(), row.h());
                     if (n == 1 && row.w() >= 64) { // рамка только у больших картинок (скриншотов)
-                        graphics.outline(x - 1, y - 1, row.w() + 2, row.h() + 2, 0xFF555555);
+                        graphics.outline(x - 1, y - 1, row.w() + 2, row.h() + 2, BookStyle.line(0xFF555555));
                     }
                 }
             } else if (i >= scroll && row.text() != null) {
-                graphics.text(this.font, row.text(), viewX, y, 0xFFCCCCCC);
+                graphics.text(this.font, row.text(), viewX, y, BookStyle.body(0xFFCCCCCC));
             } else if (i >= scroll && row.divider()) {
-                graphics.fill(viewX, y + 4, viewX + viewW, y + 5, 0xFF555555);
+                graphics.fill(viewX, y + 4, viewX + viewW, y + 5, BookStyle.line(0xFF555555));
             }
         }
         graphics.disableScissor();
@@ -403,9 +403,9 @@ public class GuideScreen extends Screen {
         if (maxScroll() > 0) {
             int thumbH = thumbH();
             int thumbY = viewY + (trackH() - thumbH) * scroll / maxScroll();
-            graphics.fill(barX(), viewY, barX() + SCROLLBAR_W, viewY + trackH(), 0xE0201818);
+            graphics.fill(barX(), viewY, barX() + SCROLLBAR_W, viewY + trackH(), BookStyle.well(0xE0201818));
             graphics.fill(barX(), thumbY, barX() + SCROLLBAR_W, thumbY + thumbH, ProfessionColors.of(profession));
-            graphics.outline(barX() - 1, viewY - 1, SCROLLBAR_W + 2, trackH() + 2, 0xFF555555);
+            graphics.outline(barX() - 1, viewY - 1, SCROLLBAR_W + 2, trackH() + 2, BookStyle.line(0xFF555555));
         }
 
         if (!canLeave()) {

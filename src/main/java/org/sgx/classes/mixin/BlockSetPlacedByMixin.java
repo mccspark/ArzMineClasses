@@ -24,6 +24,9 @@ public abstract class BlockSetPlacedByMixin {
         if (level.isClientSide() || !(placer instanceof Player)) {
             return;
         }
+        if (placer instanceof net.minecraft.server.level.ServerPlayer sp) {
+            org.sgx.classes.item.ClassBookHooks.onPlaced(sp, state);
+        }
         if (state.getBlock().builtInRegistryHolder().is(BlockTags.LOGS)) {
             PlacedLogTracker.get((ServerLevel) level).markPlaced(pos);
         }

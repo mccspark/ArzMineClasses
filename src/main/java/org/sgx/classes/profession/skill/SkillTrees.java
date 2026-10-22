@@ -17,6 +17,10 @@ public final class SkillTrees {
     private static final Map<SubclassType, List<SkillEffect>> BASE = new EnumMap<>(SubclassType.class);
 
     static {
+        // Главная цепочка — уровни 1..9 (9 узлов, build(10)).
+        // Уровень 10: выбор подкласса (стоит 1 очко), при выборе включается база подкласса (BASE).
+        // Ветка подкласса — уровни 11..20 (10 узлов, SkillChainBuilder(11) ... build(21)).
+
         // ---------------- ФЕРМЕР ----------------
         MAIN.put(ProfessionType.FARMER, new SkillChainBuilder(1)
                 .scalar("farmer_crop_yield", 1, "farmer.crop_yield_percent", 2.0, "skill.arz_classes.farmer_crop_yield")

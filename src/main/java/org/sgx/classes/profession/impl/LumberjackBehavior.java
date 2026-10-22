@@ -241,6 +241,7 @@ public final class LumberjackBehavior implements ProfessionBehavior {
             }
 
             task.world.destroyBlock(next, true, player);
+            org.sgx.classes.item.ClassBookHooks.onFelledLog(player, task.logType);
             rollCoalDrop(task.world, next, task.data);
 
             ItemStack tool = player.getMainHandItem();

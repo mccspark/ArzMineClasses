@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:book",
+    "minecraft:coal",
+    "minecraft:raw_copper",
+    "minecraft:cobblestone"
+  ],
+  "result": {
+    "id": "arz_classes:miner_book",
+    "count": 1
+  }
+}

@@ -35,6 +35,14 @@ public class ClassesTabButton extends AbstractWidget {
         int x = getX();
         int y = getY();
 
+        if (BookStyle.enabled()) {
+            BookStyle.button(graphics, x, y, width, height, hovered, true, null);
+            graphics.item(icon, x + 3, y + 3);
+            if (hovered) {
+                graphics.setTooltipForNextFrame(this.getMessage(), mouseX, mouseY);
+            }
+            return;
+        }
         graphics.fill(x, y, x + width, y + height, hovered ? BG_HOVER : BG);
         graphics.outline(x, y, width, height, hovered ? BORDER_HOVER : BORDER);
         // тонкий блик по верхней кромке внутри рамки

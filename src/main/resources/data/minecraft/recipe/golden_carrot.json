@@ -1,15 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "XXX",
-    "XXX",
-    "XXX"
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [ "this_mod_does_not_exist" ]
+    }
   ],
-  "key": {
-    "X": "minecraft:barrier"
-  },
-  "result": {
-    "id": "minecraft:air",
-    "count": 0
-  }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [ "X" ],
+  "key": { "X": "minecraft:barrier" },
+  "result": { "id": "minecraft:barrier", "count": 1 }
 }

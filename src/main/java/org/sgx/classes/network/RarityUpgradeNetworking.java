@@ -36,6 +36,10 @@ public final class RarityUpgradeNetworking {
                     shardStack.shrink(1);
                     boolean success = RarityUpgradeHandler.attempt(itemStack, check.target(), check.chance());
 
+                    if (success) {
+                        org.sgx.classes.item.ClassBookHooks.onRarityUpgraded(player, check.target());
+                    }
+
                     container.setItem(RarityUpgradeTableBlockEntity.SLOT_ITEM, ItemStack.EMPTY);
                     container.setItem(RarityUpgradeTableBlockEntity.SLOT_OUTPUT, itemStack);
                     container.setChanged();

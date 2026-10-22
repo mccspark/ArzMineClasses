@@ -95,6 +95,62 @@ public final class ModRecipeBook {
                     data -> true,
                     Component.empty()
             ),
+            // blacksmith_book.json: бесформенный — книга + три материала
+            new Entry(
+                    "blacksmith_book",
+                    Component.translatable("recipe.arz_classes.blacksmith_book"),
+                    new ItemStack[]{
+                            new ItemStack(Items.BOOK), new ItemStack(Items.IRON_INGOT), ItemStack.EMPTY,
+                            new ItemStack(Items.COPPER_INGOT), new ItemStack(Items.FLINT), ItemStack.EMPTY,
+                            ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY
+                    },
+                    new ItemStack(ModItems.BLACKSMITH_BOOK),
+                    ProfessionType.BLACKSMITH,
+                    data -> true,
+                    Component.empty()
+            ),
+            // mystic_book.json: бесформенный — книга + три материала
+            new Entry(
+                    "mystic_book",
+                    Component.translatable("recipe.arz_classes.mystic_book"),
+                    new ItemStack[]{
+                            new ItemStack(Items.BOOK), new ItemStack(Items.LAPIS_LAZULI), ItemStack.EMPTY,
+                            new ItemStack(Items.AMETHYST_SHARD), new ItemStack(Items.REDSTONE), ItemStack.EMPTY,
+                            ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY
+                    },
+                    new ItemStack(ModItems.MYSTIC_BOOK),
+                    ProfessionType.MYSTIC,
+                    data -> true,
+                    Component.empty()
+            ),
+            // miner_book.json: бесформенный — книга + три материала
+            new Entry(
+                    "miner_book",
+                    Component.translatable("recipe.arz_classes.miner_book"),
+                    new ItemStack[]{
+                            new ItemStack(Items.BOOK), new ItemStack(Items.COAL), ItemStack.EMPTY,
+                            new ItemStack(Items.RAW_COPPER), new ItemStack(Items.COBBLESTONE), ItemStack.EMPTY,
+                            ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY
+                    },
+                    new ItemStack(ModItems.MINER_BOOK),
+                    ProfessionType.MINER,
+                    data -> true,
+                    Component.empty()
+            ),
+            // lumberjack_book.json: бесформенный — книга + три материала
+            new Entry(
+                    "lumberjack_book",
+                    Component.translatable("recipe.arz_classes.lumberjack_book"),
+                    new ItemStack[]{
+                            new ItemStack(Items.BOOK), new ItemStack(Items.OAK_LOG), ItemStack.EMPTY,
+                            new ItemStack(Items.STICK), new ItemStack(Items.APPLE), ItemStack.EMPTY,
+                            ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY
+                    },
+                    new ItemStack(ModItems.LUMBERJACK_BOOK),
+                    ProfessionType.LUMBERJACK,
+                    data -> true,
+                    Component.empty()
+            ),
             // ring_iron.json: IFI / F F / IFI  (I = железо, F = фрагмент RARE)
             new Entry(
                     "ring_iron",
@@ -202,8 +258,22 @@ public final class ModRecipeBook {
                     null,               // null = виден всем классам
                     data -> true,
                     Component.empty()
+            ),
+            new Entry(
+                    "helmet_bulb",
+                    Component.translatable("recipe.arz_classes.helmet_bulb"),
+                    new ItemStack[]{
+                            new ItemStack(Items.LANTERN), new ItemStack(Items.GOLD_NUGGET), new ItemStack(Items.GOLD_NUGGET),
+                            new ItemStack(Items.STRING), new ItemStack(Items.STRING), ItemStack.EMPTY,
+                            ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY
+                    },
+                    new ItemStack(ModItems.HELMET_BULB),
+                    ProfessionType.MINER,
+                    data -> true,
+                    Component.empty()
             )
-    );
+
+            );
 
     private ModRecipeBook() {
     }

@@ -82,6 +82,8 @@ public final class ItemRepair {
                         : "message.arz_classes.repair_partial",
                 formatPercent(shown)));
 
+        org.sgx.classes.item.ClassBookHooks.onRepaired(player);
+
         int baseXp = switch (zone) {
             case BAD -> XP_BAD;
             case MEDIUM -> XP_MEDIUM;

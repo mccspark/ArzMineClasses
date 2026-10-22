@@ -147,6 +147,7 @@ public final class WeaponSharpening {
                 SoundEvents.ANVIL_USE, SoundSource.PLAYERS, 1f, 1f);
         player.sendSystemMessage(Component.translatable("message.arz_classes.sharpen_success", newLevel));
 
+        org.sgx.classes.item.ClassBookHooks.onSharpened(player, "weapon");
         ProfessionFeedback.grantXp(player, ProfessionType.BLACKSMITH, XP_PERFECT);
     }
 

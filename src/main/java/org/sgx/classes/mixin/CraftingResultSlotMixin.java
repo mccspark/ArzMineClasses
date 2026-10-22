@@ -79,7 +79,7 @@ public abstract class CraftingResultSlotMixin {
         }
     }
 
-    /** Книга урожая: крафтит только Фермер. */
+    /** Книги со статистикой: каждую крафтит только игрок своего класса. */
     @Inject(method = "mayPickup", at = @At("HEAD"), cancellable = true)
     private void arzClasses$blockNonFarmerHarvestBook(Player player, CallbackInfoReturnable<Boolean> cir) {
         Slot self = (Slot) (Object) this;
@@ -87,13 +87,14 @@ public abstract class CraftingResultSlotMixin {
             return;
         }
         ItemStack result = self.getItem();
-        if (result.isEmpty() || !result.is(ModItems.HARVEST_BOOK)) {
+        org.sgx.classes.item.BookKind bookKind = result.isEmpty() ? null : org.sgx.classes.item.BookKind.of(result);
+        if (bookKind == null) {
             return;
         }
         if (!(player instanceof ServerPlayer serverPlayer)) {
             return;
         }
-        if (ModAttachments.get(serverPlayer).currentProfession() != ProfessionType.FARMER) {
+        if (ModAttachments.get(serverPlayer).currentProfession() != bookKind.profession()) {
             cir.setReturnValue(false);
         }
     }
@@ -235,4 +236,17 @@ public abstract class CraftingResultSlotMixin {
             cir.setReturnValue(false);
         }
     }
+    @Inject(method = "mayPickup", at = @At("HEAD"), cancellable = true)
+    private void arzClasses$bulbOnlyMiner(Player player, CallbackInfoReturnable<Boolean> cir) {
+        Slot self = (Slot) (Object) this;
+        if (!(self instanceof ResultSlot) || !(player instanceof ServerPlayer serverPlayer)) {
+            return;
+        }
+        ItemStack result = self.getItem();
+        if (!result.isEmpty() && result.is(ModItems.HELMET_BULB)
+                && ModAttachments.get(serverPlayer).currentProfession() != ProfessionType.MINER) {
+            cir.setReturnValue(false);
+        }
+    }
+
 }

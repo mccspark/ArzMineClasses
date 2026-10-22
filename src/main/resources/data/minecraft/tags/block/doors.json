@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "arz_classes:acacia_glass_door",
+    "arz_classes:birch_glass_door",
+    "arz_classes:crimson_glass_door",
+    "arz_classes:dark_oak_glass_door",
+    "arz_classes:jungle_glass_door",
+    "arz_classes:oak_glass_door",
+    "arz_classes:spruce_glass_door",
+    "arz_classes:warped_glass_door"
+  ]
+}

@@ -22,7 +22,10 @@
 		"BowItemMixin",
 		"CrossbowItemMixin",
 		"BlockBehaviourDestroyProgressMixin",
-		"AnimalBreedMixin"
+		"AnimalBreedMixin",
+		"ClassBookAnvilMixin",
+		"ClassBookXpMixin",
+		"MinerHelmetNoBreakMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

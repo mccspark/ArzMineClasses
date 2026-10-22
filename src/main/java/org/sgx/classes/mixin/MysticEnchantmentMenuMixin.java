@@ -104,6 +104,8 @@ public abstract class MysticEnchantmentMenuMixin {
         if (!cir.getReturnValueZ() || !(player instanceof ServerPlayer serverPlayer)) {
             return;
         }
+        org.sgx.classes.item.ClassBookHooks.onTableEnchanted(serverPlayer,
+                ((EnchantmentMenu) (Object) this).getSlot(0).getItem());
         if (arzClasses$powerBefore > 0) {
             ProfessionEvents.onEnchant(serverPlayer, arzClasses$powerBefore);
         }

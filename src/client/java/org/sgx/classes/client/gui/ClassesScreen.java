@@ -164,6 +164,11 @@ public class ClassesScreen extends Screen {
         selectButton.active = shown != current;
         addRenderableWidget(selectButton);
 
+        // шестерёнка в правом верхнем углу центральной панели: окно выбора оформления с предпросмотром
+        addRenderableWidget(new GearButton(left + panelWidth - 24, top + 8,
+                Component.translatable("screen.arz_classes.ui_style.tooltip"),
+                () -> Minecraft.getInstance().gui.setScreen(new StyleScreen(this))));
+
         int rowY = buttonRowY();
 
         // «Руководство»: слева в нижнем ряду, напротив «Назад»; показывает руководство класса из карусели
@@ -282,7 +287,7 @@ public class ClassesScreen extends Screen {
     @Override
     public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractBackground(graphics, mouseX, mouseY, a);
-        graphics.fill(left, top, left + panelWidth, top + panelHeight, 0xC0101010);
+        BookStyle.panel(graphics, left, top, panelWidth, panelHeight);
         if (characterPanel != null) {
             characterPanel.extractBackground(graphics);
         }
@@ -315,6 +320,8 @@ public class ClassesScreen extends Screen {
         graphics.centeredText(this.font,
                 Component.translatable("screen.arz_classes.class_stats", ClientClassStats.count(shown), percent),
                 left + panelWidth / 2, top + 29, classColor);
+
+        BookStyle.divider(graphics, left + panelWidth / 2, top + 40, panelWidth / 2 - 24);
 
         ItemStack icon = ProfessionIcons.of(shown);
         graphics.pose().pushMatrix();
@@ -393,15 +400,16 @@ public class ClassesScreen extends Screen {
         graphics.text(this.font, levelText, x0, y, color);
 
         // тёмный фон как у плашки очков, заполнение цветом класса, рамка как у закрытых узлов
-        graphics.fill(barX, y, barX + barW, y + XP_BAR_H, 0xE0201818);
+        graphics.fill(barX, y, barX + barW, y + XP_BAR_H, BookStyle.well(0xE0201818));
         int filled = (int) (barW * progress);
         graphics.fill(barX, y, barX + filled, y + XP_BAR_H, color);
-        graphics.outline(barX - 1, y - 1, barW + 2, XP_BAR_H + 2, 0xFF555555);
+        graphics.outline(barX - 1, y - 1, barW + 2, XP_BAR_H + 2,
+                BookStyle.enabled() ? BookStyle.theme().gold : 0xFF555555);
 
         // деления: все одинаковые, тонкие и тёмные
         for (int i = 1; i < XP_SEGMENTS; i++) {
             int tx = barX + Math.round(barW * (float) i / XP_SEGMENTS);
-            graphics.fill(tx, y, tx + 1, y + XP_BAR_H, 0x90000000);
+            graphics.fill(tx, y, tx + 1, y + XP_BAR_H, BookStyle.enabled() ? 0x70000000 : 0x90000000);
         }
 
         this.xpBarX = barX;

@@ -101,6 +101,19 @@ public final class SharpeningScreen extends Screen {
     }
 
     @Override
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+        super.extractBackground(graphics, mouseX, mouseY, partialTick);
+        if (BookStyle.enabled()) {
+            // рамка вокруг шкалы и правил
+            int barY = this.height / 2;
+            int w = Math.min(this.width - 8, BAR_WIDTH + 40);
+            int top = barY - 46;
+            int bottom = barY + BAR_HEIGHT + 14 + 4 * RULE_LINE_HEIGHT + 14;
+            BookStyle.panel(graphics, (this.width - w) / 2, top, w, bottom - top);
+        }
+    }
+
+    @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         super.extractRenderState(graphics, mouseX, mouseY, partialTick);
 
@@ -110,7 +123,7 @@ public final class SharpeningScreen extends Screen {
         int barX = (this.width - BAR_WIDTH) / 2;
         int barY = this.height / 2;
 
-        graphics.centeredText(this.font, this.getTitle(), this.width / 2, barY - 30, 0xFFFFFFFF);
+        graphics.centeredText(this.font, this.getTitle(), this.width / 2, barY - 30, BookStyle.title(0xFFFFFFFF));
         graphics.centeredText(this.font, Component.translatable("screen.arz_classes.sharpen_hint"),
                 this.width / 2, barY - 16, 0xFFFFFF55);
 
@@ -118,7 +131,11 @@ public final class SharpeningScreen extends Screen {
         int mediumColor = repair ? 0xFF3F8FE0 : 0xFF4C9A3A;
         int perfectColor = repair ? 0xFF6FD0FF : 0xFF7CFF6B;
 
-        graphics.fill(barX, barY, barX + BAR_WIDTH, barY + BAR_HEIGHT, 0xFF202020);
+        if (BookStyle.enabled()) {
+            BookStyle.inset(graphics, barX - 1, barY - 1, BAR_WIDTH + 2, BAR_HEIGHT + 2);
+        } else {
+            graphics.fill(barX, barY, barX + BAR_WIDTH, barY + BAR_HEIGHT, 0xFF202020);
+        }
         drawZone(graphics, barX, barY, badWidth, badColor);
         drawZone(graphics, barX, barY, mediumWidth, mediumColor);
         drawZone(graphics, barX, barY, perfectWidth, perfectColor);

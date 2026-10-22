@@ -4,10 +4,16 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.level.ServerPlayer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import org.sgx.classes.Arz_classes;
+import org.sgx.classes.attachment.ModAttachments;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Достижения классов (data/arz_classes/advancement):
@@ -25,7 +31,49 @@ public final class ClassAdvancements {
 
     private static final String CRITERION = "chosen";
 
+    /** Через сколько тиков после входа повторить синхронизацию (см. {@link #init()}). */
+    private static final int JOIN_DELAY_TICKS = 40;
+    /** Страховка: раз в 10 секунд досинхронизируем всех. */
+    private static final int PERIODIC_TICKS = 200;
+
+    private static final Map<UUID, Integer> PENDING = new HashMap<>();
+    private static int tickCounter = 0;
+
     private ClassAdvancements() {
+    }
+
+    /**
+     * Выдача на самом событии входа не срабатывает: ванильный вход игрока позже перечитывает его прогресс
+     * достижений из файла и затирает то, что мы выдали в JOIN. Поэтому повторяем синхронизацию спустя
+     * пару секунд после входа и потом периодически (sync идемпотентна и дешёвая, когда всё уже выдано).
+     */
+    public static void init() {
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
+                PENDING.put(handler.getPlayer().getUUID(), JOIN_DELAY_TICKS));
+        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) ->
+                PENDING.remove(handler.getPlayer().getUUID()));
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
+            if (!PENDING.isEmpty()) {
+                for (var it = PENDING.entrySet().iterator(); it.hasNext(); ) {
+                    var e = it.next();
+                    if (e.getValue() > 1) {
+                        e.setValue(e.getValue() - 1);
+                        continue;
+                    }
+                    it.remove();
+                    ServerPlayer player = server.getPlayerList().getPlayer(e.getKey());
+                    if (player != null) {
+                        sync(player, ModAttachments.get(player));
+                    }
+                }
+            }
+            if (++tickCounter >= PERIODIC_TICKS) {
+                tickCounter = 0;
+                for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                    sync(player, ModAttachments.get(player));
+                }
+            }
+        });
     }
 
     public static void sync(ServerPlayer player, ProfessionData data) {

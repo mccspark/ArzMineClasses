@@ -35,8 +35,7 @@ public class Arz_classesClient implements ClientModInitializer {
         BonePouchHint.register();
         FoodPouchTooltip.init();
         HarvestBookTooltip.init();
-        org.sgx.classes.item.HarvestBookItem.clientOpener = hand ->
-                net.minecraft.client.Minecraft.getInstance().gui.setScreen(new HarvestBookScreen(hand));
+        org.sgx.classes.item.ClassBookItem.clientOpener = org.sgx.classes.client.gui.ClassBookScreen::openFromHand;
         MealStarsTooltip.init();
         MenuScreens.register(ModMenus.BONE_POUCH, BonePouchScreen::new);
         MenuScreens.register(ModMenus.FOOD_POUCH, FoodPouchScreen::new);
@@ -49,7 +48,7 @@ public class Arz_classesClient implements ClientModInitializer {
         net.minecraft.client.renderer.blockentity.BlockEntityRenderers.register(
                 org.sgx.classes.block.chest.ModChests.TRAPPED_CHEST_ENTITY,
                 org.sgx.classes.client.chest.WoodChestRenderer::new);
-
+        // висящие на стойках предметы (общий тип блок-сущности для всех пород)
         net.minecraft.client.renderer.blockentity.BlockEntityRenderers.register(
                 org.sgx.classes.block.ModBlockEntities.WEAPON_RACK,
                 org.sgx.classes.client.rack.WeaponRackRenderer::new);

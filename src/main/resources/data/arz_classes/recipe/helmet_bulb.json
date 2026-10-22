@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:lantern",
+    "minecraft:gold_nugget",
+    "minecraft:gold_nugget",
+    "minecraft:string",
+    "minecraft:string"
+  ],
+  "result": {
+    "id": "arz_classes:helmet_bulb",
+    "count": 1
+  }
+}

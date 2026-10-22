@@ -48,6 +48,13 @@ public class StyledButton extends AbstractWidget {
 
         int x = getX();
         int y = getY();
+        if (BookStyle.enabled()) {
+            BookStyle.button(graphics, x, y, width, height, this.isHovered(), this.active, this.getMessage());
+            if (this.isHovered() && tooltip != null) {
+                graphics.setTooltipForNextFrame(tooltip, mouseX, mouseY);
+            }
+            return;
+        }
         graphics.fill(x, y, x + width, y + height, bg);
         graphics.outline(x, y, width, height, border);
         if (this.active) {

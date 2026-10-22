@@ -168,7 +168,7 @@ public final class RarityWheelScreen extends Screen {
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
 
-        graphics.centeredText(this.font, this.title, left + PANEL_SIZE / 2, top - 20, 0xFFFFFF);
+        graphics.centeredText(this.font, this.title, left + PANEL_SIZE / 2, top - 20, BookStyle.title(0xFFFFFF));
 
         boolean finished = anim.isFinished();
         float time = finished ? anim.finishTicks() + a : anim.openTicks() + a;
@@ -211,7 +211,7 @@ public final class RarityWheelScreen extends Screen {
     private void drawLegend(GuiGraphicsExtractor graphics, boolean finished, float time) {
         int rowY = top + 4;
         graphics.text(this.font, Component.translatable("screen.arz_classes.rarity_legend_title"),
-                legendLeft, rowY, 0xFFCCCCCC);
+                legendLeft, rowY, BookStyle.body(0xFFCCCCCC));
         rowY += 14;
 
         for (int i = 0; i < sectors.size(); i++) {
@@ -229,7 +229,7 @@ public final class RarityWheelScreen extends Screen {
             graphics.text(this.font, name, legendLeft + 14, rowY + 1, s.rarity().argb());
 
             String pct = String.format("%.1f%%", (s.weight() / totalWeight()) * 100f);
-            graphics.text(this.font, pct, legendLeft + 14, rowY + 10, 0xFFAAAAAA);
+            graphics.text(this.font, pct, legendLeft + 14, rowY + 10, BookStyle.dim(0xFFAAAAAA));
 
             rowY += 24;
         }

@@ -21,6 +21,7 @@ public class StyledConfirmScreen extends Screen {
     private int textWidth;
     private int titleY;
     private int messageY;
+    private int boxX, boxY, boxW, boxH;
 
     public StyledConfirmScreen(BooleanConsumer callback, Component title, Component message) {
         super(title);
@@ -37,6 +38,12 @@ public class StyledConfirmScreen extends Screen {
         this.messageY = titleY + 16;
         int buttonsY = messageY + lines * 10 + 20;
 
+        // рамка под текст и кнопки (рисуется только в книжных темах)
+        this.boxW = Math.min(this.width - 8, Math.max(textWidth + 40, 2 * BUTTON_W + GAP + 32));
+        this.boxX = (this.width - boxW) / 2;
+        this.boxY = titleY - 18;
+        this.boxH = buttonsY + BUTTON_H + 16 - boxY;
+
         int centerX = this.width / 2;
         addRenderableWidget(new StyledButton(centerX - BUTTON_W - GAP / 2, buttonsY, BUTTON_W, BUTTON_H,
                 CommonComponents.GUI_YES, () -> callback.accept(true)));
@@ -45,10 +52,19 @@ public class StyledConfirmScreen extends Screen {
     }
 
     @Override
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        super.extractBackground(graphics, mouseX, mouseY, a);
+        if (BookStyle.enabled()) {
+            BookStyle.panel(graphics, boxX, boxY, boxW, boxH);
+        }
+    }
+
+    @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
-        graphics.centeredText(this.font, this.title, this.width / 2, titleY, 0xFFFFD46B);
-        graphics.textWithWordWrap(this.font, message, (this.width - textWidth) / 2, messageY, textWidth, 0xFFE6E6E6);
+        graphics.centeredText(this.font, this.title, this.width / 2, titleY, BookStyle.title(0xFFFFD46B));
+        graphics.textWithWordWrap(this.font, message, (this.width - textWidth) / 2, messageY, textWidth,
+                BookStyle.body(0xFFE6E6E6));
     }
 
     @Override

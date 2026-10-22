@@ -7,7 +7,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
 import org.sgx.classes.Arz_classes;
 import org.sgx.classes.client.gui.ClassesScreen;
-import org.sgx.classes.client.gui.HarvestBookScreen;
+import org.sgx.classes.client.gui.ClassBookScreen;
 
 public final class ModKeyBindings {
 
@@ -24,8 +24,8 @@ public final class ModKeyBindings {
             )
     );
 
-    /** Открыть книгу урожая (из слота Trinkets или инвентаря). Клавиша меняется в настройках управления. */
-    public static final KeyMapping OPEN_HARVEST_BOOK = KeyMappingHelper.registerKeyMapping(
+    /** Открыть книгу класса (из слота Trinkets или инвентаря; ключ перевода прежний, чтобы не сбить настройку). Клавиша меняется в настройках управления. */
+    public static final KeyMapping OPEN_BOOK = KeyMappingHelper.registerKeyMapping(
             new KeyMapping(
                     "key.arz_classes.open_harvest_book",
                     InputConstants.Type.KEYSYM,
@@ -45,8 +45,8 @@ public final class ModKeyBindings {
                 client.gui.setScreen(new ClassesScreen(null));
             }
 
-            while (OPEN_HARVEST_BOOK.consumeClick()) {
-                HarvestBookScreen.openFromKey(client);
+            while (OPEN_BOOK.consumeClick()) {
+                ClassBookScreen.openFromKey(client);
             }
 
         });

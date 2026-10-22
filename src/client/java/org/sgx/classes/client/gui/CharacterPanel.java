@@ -102,7 +102,7 @@ public final class CharacterPanel {
     }
 
     public void extractBackground(GuiGraphicsExtractor graphics) {
-        graphics.fill(left, top, left + width, top + height, 0xC0101010);
+        BookStyle.panel(graphics, left, top, width, height);
     }
 
     /** Подрезает строку по ширине, добавляя многоточие. */

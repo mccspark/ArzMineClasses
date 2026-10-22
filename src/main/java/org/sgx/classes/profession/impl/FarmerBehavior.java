@@ -49,8 +49,6 @@ public final class FarmerBehavior implements ProfessionBehavior {
         UseBlockCallback.EVENT.register(FarmerBehavior::onUseBlock);
     }
 
-    private static final Identifier TOMATO_VINE_ID = Identifier.fromNamespaceAndPath("farmersdelight", "tomatoes");
-
     private static Map<Block, Item> goldenCropMap;
 
     private static Map<Block, Item> goldenCropMap() {
@@ -82,12 +80,18 @@ public final class FarmerBehavior implements ProfessionBehavior {
     @Override
     public int onBlockBroken(ServerPlayer player, ServerLevel world, BlockPos pos, BlockState state) {
         Block block = state.getBlock();
+        if (block == Blocks.BROWN_MUSHROOM || block == Blocks.RED_MUSHROOM) {
+            // обычные грибы: только в счётчик книги, опыта не даём
+            HarvestBookItem.recordCrop(player, block);
+            return 0;
+        }
         if (!(block instanceof CropBlock crop) || !crop.isMaxAge(state)) {
             return 0;
         }
 
         applyHarvestBonuses(player, world, pos, state, ModAttachments.get(player));
         HarvestBookItem.recordCrop(player, block);
+        HarvestBookItem.recordNearbyDrops(player, world, pos);
         return XP_PER_HARVEST;
     }
 
@@ -100,11 +104,6 @@ public final class FarmerBehavior implements ProfessionBehavior {
 
         BlockPos pos = hit.getBlockPos();
         BlockState state = world.getBlockState(pos);
-        // Томатная лоза Farmer's Delight — CropBlock, но у неё свой сбор (ProfessionEvents: опыт + золотой томат).
-        // Если обработать её здесь и вернуть SUCCESS, остальные ПКМ-обработчики не получат событие.
-        if (BuiltInRegistries.BLOCK.getKey(state.getBlock()).equals(TOMATO_VINE_ID)) {
-            return InteractionResult.PASS;
-        }
         if (!(state.getBlock() instanceof CropBlock crop) || !crop.isMaxAge(state)) {
             return InteractionResult.PASS;
         }
@@ -126,6 +125,7 @@ public final class FarmerBehavior implements ProfessionBehavior {
 
         applyHarvestBonuses(serverPlayer, world, pos, state, data);
         HarvestBookItem.recordCrop(serverPlayer, state.getBlock());
+        HarvestBookItem.recordNearbyDrops(serverPlayer, world, pos);
 
         world.setBlockAndUpdate(pos, crop.getStateForAge(0));
         world.playSound(null, pos, SoundEvents.CROP_PLANTED, SoundSource.BLOCKS, 1.0f, 1.0f);

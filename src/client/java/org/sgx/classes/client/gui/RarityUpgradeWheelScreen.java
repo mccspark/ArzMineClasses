@@ -135,7 +135,7 @@ public final class RarityUpgradeWheelScreen extends Screen {
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
 
-        graphics.centeredText(this.font, this.title, centerX, top - 20, 0xFFFFFFFF);
+        graphics.centeredText(this.font, this.title, centerX, top - 20, BookStyle.title(0xFFFFFFFF));
 
         boolean finished = anim.isFinished();
         float time = finished ? anim.finishTicks() + a : anim.openTicks() + a;

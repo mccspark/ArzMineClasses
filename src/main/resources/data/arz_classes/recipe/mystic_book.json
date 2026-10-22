@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:book",
+    "minecraft:lapis_lazuli",
+    "minecraft:amethyst_shard",
+    "minecraft:redstone"
+  ],
+  "result": {
+    "id": "arz_classes:mystic_book",
+    "count": 1
+  }
+}

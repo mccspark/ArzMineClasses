@@ -3,7 +3,7 @@ package org.sgx.classes.client;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import org.sgx.classes.item.HarvestBookItem;
+import org.sgx.classes.item.ClassBookItem;
 import org.sgx.classes.item.ModDataComponents;
 
 public final class HarvestBookTooltip {
@@ -13,7 +13,7 @@ public final class HarvestBookTooltip {
 
     public static void init() {
         ItemTooltipCallback.EVENT.register((stack, context, type, lines) -> {
-            if (!(stack.getItem() instanceof HarvestBookItem)) {
+            if (!(stack.getItem() instanceof ClassBookItem)) {
                 return;
             }
             String owner = stack.get(ModDataComponents.HARVEST_OWNER_NAME);

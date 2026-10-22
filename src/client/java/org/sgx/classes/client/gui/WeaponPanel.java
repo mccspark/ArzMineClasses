@@ -344,7 +344,7 @@ public class WeaponPanel {
 
     /** Фон панели — вызывать из ClassesScreen.extractBackground. */
     public void extractBackground(GuiGraphicsExtractor g) {
-        g.fill(x, y, x + width, y + height, 0xC0101010);
+        BookStyle.panel(g, x, y, width, height);
     }
 
     public void render(GuiGraphicsExtractor g, Font font, int mouseX, int mouseY) {
@@ -352,7 +352,7 @@ public class WeaponPanel {
         ProfessionType current = data.currentProfession();
         refreshIfNeeded(data);
 
-        g.text(font, Component.translatable("screen.arz_classes.skill_tree"), x + 8, y + 6, 0xFFFFFFFF);
+        g.text(font, Component.translatable("screen.arz_classes.skill_tree"), x + 8, y + 6, BookStyle.body(0xFFFFFFFF));
 
         if (current == ProfessionType.NONE) {
             g.textWithWordWrap(font, Component.translatable("screen.arz_classes.no_profession"),
@@ -362,10 +362,11 @@ public class WeaponPanel {
 
         // плашка очков навыков
         int badgeX = x + 6, badgeY = y + 18, badgeW = width - 12, badgeH = 14;
-        g.fill(badgeX, badgeY, badgeX + badgeW, badgeY + badgeH, 0xE0201818);
-        g.outline(badgeX, badgeY, badgeW, badgeH, 0xFFFFD46B);
+        g.fill(badgeX, badgeY, badgeX + badgeW, badgeY + badgeH, BookStyle.well(0xE0201818));
+        g.outline(badgeX, badgeY, badgeW, badgeH,
+                BookStyle.enabled() ? BookStyle.theme().gold : 0xFFFFD46B);
         g.centeredText(font, Component.translatable("screen.arz_classes.skill_points", data.availableSkillPoints()),
-                badgeX + badgeW / 2, badgeY + 3, 0xFFFFD46B);
+                badgeX + badgeW / 2, badgeY + 3, BookStyle.title(0xFFFFD46B));
 
         // выбранный подкласс
         if (data.currentSubclass() != null) {

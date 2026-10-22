@@ -35,6 +35,7 @@ public final class RarityCraftHandler {
         RarityStatApplier.apply(stack, result);
         applyDurabilityBonus(data, stack);
         RarityDurability.change(stack, null, result); // % прочности от самой редкости, поверх бонуса кузнеца
+        org.sgx.classes.item.ClassBookHooks.onCrafted(player, stack, result);
 
         // +5 опыта за крафт любого предмета, который может получить редкость —
         // кольцо опыта уже учитывается автоматически внутри grantXp().

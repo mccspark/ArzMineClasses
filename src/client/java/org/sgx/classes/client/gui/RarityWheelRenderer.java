@@ -66,6 +66,10 @@ public final class RarityWheelRenderer {
 
     /** Панель в стиле майнкрафтовского тултипа (тёмный фон и фиолетовая рамка). */
     public static void drawPanel(GuiGraphicsExtractor g, int x0, int y0, int x1, int y1) {
+        if (BookStyle.enabled()) {
+            BookStyle.panel(g, x0, y0, x1 - x0, y1 - y0);
+            return;
+        }
         g.fill(x0, y0, x1, y1, 0xF0100010);
         g.fill(x0, y0, x1, y0 + 1, 0xA05000FF);        // верх
         g.fill(x0, y0, x0 + 1, y1, 0xA05000FF);        // лево
