@@ -24,7 +24,7 @@ public final class ModChests {
 
     public static final List<String> WOODS = List.of(
             "acacia", "bamboo", "birch", "cherry", "warped", "dark_oak",
-            "jungle", "mangrove", "oak", "spruce", "crimson");
+            "jungle", "mangrove", "oak", "spruce", "crimson", "pale_oak");
 
     private static final Map<String, Item> PLANKS = Map.ofEntries(
             Map.entry("acacia", Items.ACACIA_PLANKS),
@@ -37,7 +37,8 @@ public final class ModChests {
             Map.entry("mangrove", Items.MANGROVE_PLANKS),
             Map.entry("oak", Items.OAK_PLANKS),
             Map.entry("spruce", Items.SPRUCE_PLANKS),
-            Map.entry("crimson", Items.CRIMSON_PLANKS));
+            Map.entry("crimson", Items.CRIMSON_PLANKS),
+            Map.entry("pale_oak", Items.PALE_OAK_PLANKS));
 
     private static final Map<String, WoodChestBlock> CHESTS = new LinkedHashMap<>();
     private static final Map<String, WoodChestBlock> TRAPPED_CHESTS = new LinkedHashMap<>();

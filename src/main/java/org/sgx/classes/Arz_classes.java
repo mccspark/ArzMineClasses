@@ -68,6 +68,7 @@ public class Arz_classes implements ModInitializer {
 		ModGlassDoors.init();
 		org.sgx.classes.item.ClassBookItem.register();
 		org.sgx.classes.item.ClassBookDeathGuard.init();
+		org.sgx.classes.item.MysticBookTracker.init();
 		org.sgx.classes.profession.ClassAdvancements.init();
 		ModCreativeTabs.init();
 		SkillUnlockEvents.init();

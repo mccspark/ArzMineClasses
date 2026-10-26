@@ -146,10 +146,10 @@ public final class SkillTrees {
         MAIN.put(ProfessionType.MYSTIC, new SkillChainBuilder(1)
                 .scalar("mystic_enchant_threshold", 1, "mystic.enchant_threshold_reduction", 1.0,
                         "skill.arz_classes.mystic_enchant_threshold")
-                .scalar("mystic_xp_bonus", 1, "mystic.xp_bonus_percent", 5.0, "skill.arz_classes.mystic_xp_bonus")
+                .scalar("mystic_xp_bonus", 1, "mystic.xp_bonus_percent", 10.0, "skill.arz_classes.mystic_xp_bonus")
                 .milestone("mystic_max_level", "mystic_max_level", "skill.arz_classes.mystic_max_level")
                 .milestone("mystic_iron_ring_craft", "mystic_iron_ring_craft", "skill.arz_classes.mystic_iron_ring_craft")
-                .scalar("mystic_xp_bonus", 1, "mystic.xp_bonus_percent", 5.0, "skill.arz_classes.mystic_xp_bonus")
+                .scalar("mystic_xp_bonus", 1, "mystic.xp_bonus_percent", 10.0, "skill.arz_classes.mystic_xp_bonus")
                 .milestone("mystic_enderman_calm", "mystic_enderman_calm", "skill.arz_classes.mystic_enderman_calm")
                 .milestone("mystic_all_enchants_bonus", "mystic_all_enchants_bonus", "skill.arz_classes.mystic_all_enchants_bonus")
                 .scalar("mystic_enchant_threshold", 1, "mystic.enchant_threshold_reduction", 1.0,

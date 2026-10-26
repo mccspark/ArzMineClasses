@@ -24,7 +24,6 @@
 		"BlockBehaviourDestroyProgressMixin",
 		"AnimalBreedMixin",
 		"ClassBookAnvilMixin",
-		"ClassBookXpMixin",
 		"MinerHelmetNoBreakMixin",
 		"InventoryMenuMixin"
 	],

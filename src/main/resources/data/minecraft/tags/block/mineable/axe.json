@@ -42,6 +42,13 @@
     "arz_classes:jungle_glass_door",
     "arz_classes:oak_glass_door",
     "arz_classes:spruce_glass_door",
-    "arz_classes:warped_glass_door"
+    "arz_classes:warped_glass_door",
+    "arz_classes:pale_oak_chest",
+    "arz_classes:trapped_pale_oak_chest",
+    "arz_classes:pale_oak_weapon_rack",
+    "arz_classes:pale_oak_glass_door",
+    "arz_classes:cherry_glass_door",
+    "arz_classes:mangrove_glass_door",
+    "arz_classes:bamboo_glass_door"
   ]
 }

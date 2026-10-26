@@ -181,6 +181,7 @@ public class ClassBookItem extends Item {
         Map<String, Integer> map = new HashMap<>(stats(book));
         map.merge(key, amount, Integer::sum);
         book.set(ModDataComponents.HARVEST_STATS, map);
+        commit(player, book);
     }
 
     public static void record(ServerPlayer player, BookKind kind, String key) {
@@ -200,6 +201,18 @@ public class ClassBookItem extends Item {
         Map<String, Integer> map = new HashMap<>(stats(book));
         map.merge(key, value, Math::max);
         book.set(ModDataComponents.HARVEST_STATS, map);
+        commit(player, book);
+    }
+
+    /**
+     * Книга в слоте Trinkets: изменение компонента «на месте» слот не считает изменением и клиенту не шлёт —
+     * экран книги показывал бы старые цифры до перезахода. Повторная запись той же книги в слот это исправляет.
+     */
+    private static void commit(ServerPlayer player, ItemStack book) {
+        for (TrinketSlotAccess access : TrinketsApi.getAttachment(player).equipped(s -> s == book, false)) {
+            access.set(book);
+            return;
+        }
     }
 
     // ───────────── сеть ─────────────

@@ -603,14 +603,12 @@
   "screen.arz_classes.book.lumberjack.apples": "Apples",
   "screen.arz_classes.book.lumberjack.apples_hint": "From leaves",
   "screen.arz_classes.book.lumberjack.apples_total": "Total apples: %s",
-
   "item.arz_classes.helmet_bulb": "Helmet Bulb",
   "item.arz_classes.miner_helmet_off": "Miner's Helmet (Discharged)",
   "recipe.arz_classes.helmet_bulb": "Helmet Bulb",
   "message.arz_classes.helmet_bulb_full": "The helmet is already fully charged",
   "message.arz_classes.helmet_bulb_replaced": "Bulb replaced",
   "message.arz_classes.miner_helmet_discharged": "Helmet discharged. Bulb in one hand, helmet in the other, right-click",
-
   "screen.arz_classes.ui_style": "Style",
   "screen.arz_classes.ui_style.title": "Appearance",
   "screen.arz_classes.ui_style.tooltip": "Interface appearance",
@@ -622,5 +620,19 @@
   "screen.arz_classes.ui_style.name.brown": "Light leather",
   "screen.arz_classes.ui_style.name.dark": "Dark leather",
   "screen.arz_classes.ui_style.name.green": "Green",
-  "screen.arz_classes.ui_style.name.purple": "Purple"
+  "screen.arz_classes.ui_style.name.purple": "Purple",
+  "item.arz_classes.pale_oak_chest": "Pale Oak Chest",
+  "item.arz_classes.trapped_pale_oak_chest": "Trapped Pale Oak Chest",
+  "item.arz_classes.pale_oak_weapon_rack": "Pale Oak Weapon Rack",
+  "item.arz_classes.pale_oak_glass_door": "Pale Oak Glass Door",
+  "item.arz_classes.cherry_glass_door": "Cherry Glass Door",
+  "item.arz_classes.mangrove_glass_door": "Mangrove Glass Door",
+  "item.arz_classes.bamboo_glass_door": "Bamboo Glass Door",
+  "block.arz_classes.pale_oak_chest": "Pale Oak Chest",
+  "block.arz_classes.trapped_pale_oak_chest": "Trapped Pale Oak Chest",
+  "block.arz_classes.pale_oak_weapon_rack": "Pale Oak Weapon Rack",
+  "block.arz_classes.pale_oak_glass_door": "Pale Oak Glass Door",
+  "block.arz_classes.cherry_glass_door": "Cherry Glass Door",
+  "block.arz_classes.mangrove_glass_door": "Mangrove Glass Door",
+  "block.arz_classes.bamboo_glass_door": "Bamboo Glass Door"
 }

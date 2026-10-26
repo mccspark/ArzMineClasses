@@ -603,14 +603,12 @@
   "screen.arz_classes.book.lumberjack.apples": "Яблоки",
   "screen.arz_classes.book.lumberjack.apples_hint": "С листвы",
   "screen.arz_classes.book.lumberjack.apples_total": "Всего яблок: %s",
-
   "item.arz_classes.helmet_bulb": "Лампочка для каски",
   "item.arz_classes.miner_helmet_off": "Каска шахтёра (разряжена)",
   "recipe.arz_classes.helmet_bulb": "Лампочка для каски",
   "message.arz_classes.helmet_bulb_full": "Каска уже полностью заряжена",
   "message.arz_classes.helmet_bulb_replaced": "Лампочка заменена",
   "message.arz_classes.miner_helmet_discharged": "Каска разряжена. Лампочка в одну руку, каска в другую, ПКМ",
-
   "screen.arz_classes.ui_style": "Вид",
   "screen.arz_classes.ui_style.title": "Оформление",
   "screen.arz_classes.ui_style.tooltip": "Оформление интерфейса",
@@ -622,5 +620,19 @@
   "screen.arz_classes.ui_style.name.brown": "Светлая кожа",
   "screen.arz_classes.ui_style.name.dark": "Тёмная кожа",
   "screen.arz_classes.ui_style.name.green": "Зелёный",
-  "screen.arz_classes.ui_style.name.purple": "Фиолетовый"
+  "screen.arz_classes.ui_style.name.purple": "Фиолетовый",
+  "item.arz_classes.pale_oak_chest": "Бледно-дубовый сундук",
+  "item.arz_classes.trapped_pale_oak_chest": "Бледно-дубовый сундук-ловушка",
+  "item.arz_classes.pale_oak_weapon_rack": "Бледно-дубовая оружейная стойка",
+  "item.arz_classes.pale_oak_glass_door": "Бледно-дубовая дверь со стеклом",
+  "item.arz_classes.cherry_glass_door": "Вишнёвая дверь со стеклом",
+  "item.arz_classes.mangrove_glass_door": "Мангровая дверь со стеклом",
+  "item.arz_classes.bamboo_glass_door": "Бамбуковая дверь со стеклом",
+  "block.arz_classes.pale_oak_chest": "Бледно-дубовый сундук",
+  "block.arz_classes.trapped_pale_oak_chest": "Бледно-дубовый сундук-ловушка",
+  "block.arz_classes.pale_oak_weapon_rack": "Бледно-дубовая оружейная стойка",
+  "block.arz_classes.pale_oak_glass_door": "Бледно-дубовая дверь со стеклом",
+  "block.arz_classes.cherry_glass_door": "Вишнёвая дверь со стеклом",
+  "block.arz_classes.mangrove_glass_door": "Мангровая дверь со стеклом",
+  "block.arz_classes.bamboo_glass_door": "Бамбуковая дверь со стеклом"
 }
