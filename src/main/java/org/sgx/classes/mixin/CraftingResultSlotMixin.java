@@ -145,10 +145,11 @@ public abstract class CraftingResultSlotMixin {
             return;
         }
         ProfessionData data = ModAttachments.get(serverPlayer);
+        // Незеритовое кольцо пока отключено: из книги рецептов убрано, крафт тоже закрыт.
         boolean allowed = data.currentProfession() == ProfessionType.MYSTIC
                 && (iron ? data.hasAbility("mystic_iron_ring_craft")
                 : gold ? data.hasAbility("mystic_gold_ring_craft")
-                : true);
+                : false);
         if (!allowed) {
             cir.setReturnValue(false);
         }

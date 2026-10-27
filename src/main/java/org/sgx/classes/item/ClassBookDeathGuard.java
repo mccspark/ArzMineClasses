@@ -5,16 +5,17 @@ import eu.pb4.trinkets.api.TrinketsApi;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+import org.sgx.classes.Arz_classes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Книги в слоте Trinkets при смерти. Моды-«трупы» (Corpse и подобные) забирают вещи из инвентаря и
- * ванильных дропов, а предметы из слотов Trinkets они могут не увидеть — книга тогда пропадает.
- * Поэтому прямо перед смертью переносим книги из слота в обычный инвентарь: оттуда их заберёт
- * любой мод трупов (а без такого мода они выпадут как обычный лут, как и раньше).
- * Если в инвентаре нет места — книга остаётся в слоте (поведение Trinkets по умолчанию).
+ * Книги классов и кольца опыта в слотах Trinkets при смерти. Предметы из слотов Trinkets могли
+ * пропадать (моды-«трупы» их не видят), поэтому прямо перед смертью переносим их так:
+ * 1) в обычный инвентарь (оттуда их заберёт мод трупов либо они выпадут как обычный лут);
+ * 2) если в инвентаре нет места — выбрасываем рядом с игроком.
+ * Слот при этом очищается, предмет не дублируется и не теряется.
  */
 public final class ClassBookDeathGuard {
 
@@ -24,26 +25,40 @@ public final class ClassBookDeathGuard {
     public static void init() {
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, source, amount) -> {
             if (entity instanceof ServerPlayer player) {
-                moveBooksToInventory(player);
+                try {
+                    moveTrinketsOut(player);
+                } catch (Exception e) {
+                    Arz_classes.LOGGER.error("Не удалось перенести тринкеты при смерти {}", player.getName().getString(), e);
+                }
             }
             return true;
         });
     }
 
-    private static void moveBooksToInventory(ServerPlayer player) {
+    private static boolean isProtected(ItemStack stack) {
+        return stack.getItem() instanceof ClassBookItem
+                || stack.is(ModItems.RING_IRON)
+                || stack.is(ModItems.RING_GOLD)
+                || stack.is(ModItems.RING_NETHERITE);
+    }
+
+    private static void moveTrinketsOut(ServerPlayer player) {
         List<TrinketSlotAccess> slots = new ArrayList<>();
-        for (TrinketSlotAccess access : TrinketsApi.getAttachment(player)
-                .equipped(s -> s.getItem() instanceof ClassBookItem, false)) {
+        for (TrinketSlotAccess access : TrinketsApi.getAttachment(player).equipped(ClassBookDeathGuard::isProtected, false)) {
             slots.add(access);
         }
         for (TrinketSlotAccess access : slots) {
-            ItemStack book = access.get();
-            if (book.isEmpty()) {
+            ItemStack stack = access.get();
+            if (stack.isEmpty()) {
                 continue;
             }
-            ItemStack copy = book.copy();
-            if (player.getInventory().add(copy)) {
-                access.set(ItemStack.EMPTY);
+            ItemStack copy = stack.copy();
+            access.set(ItemStack.EMPTY);
+            if (!player.getInventory().add(copy)) {
+                // add() мог положить часть стека; остаток (если есть) выбрасываем рядом
+                if (!copy.isEmpty()) {
+                    player.drop(copy, true);
+                }
             }
         }
     }

@@ -179,20 +179,6 @@ public final class ModRecipeBook {
                     data -> data.hasAbility("mystic_gold_ring_craft"),
                     Component.translatable("recipe.arz_classes.ring_gold.locked")
             ),
-            // ring_netherite.json: SLS / LRL / SLS  (S = незеритовый лом, L = фрагмент LEGENDARY, R = золотое кольцо)
-            new Entry(
-                    "ring_netherite",
-                    Component.translatable("recipe.arz_classes.ring_netherite"),
-                    new ItemStack[]{
-                            new ItemStack(Items.NETHERITE_SCRAP), new ItemStack(ModItems.RARITY_FRAGMENTS.get(ItemRarity.LEGENDARY)), new ItemStack(Items.NETHERITE_SCRAP),
-                            new ItemStack(ModItems.RARITY_FRAGMENTS.get(ItemRarity.LEGENDARY)), new ItemStack(ModItems.RING_GOLD), new ItemStack(ModItems.RARITY_FRAGMENTS.get(ItemRarity.LEGENDARY)),
-                            new ItemStack(Items.NETHERITE_SCRAP), new ItemStack(ModItems.RARITY_FRAGMENTS.get(ItemRarity.LEGENDARY)), new ItemStack(Items.NETHERITE_SCRAP)
-                    },
-                    new ItemStack(ModItems.RING_NETHERITE),
-                    ProfessionType.MYSTIC,
-                    data -> true, // как в CraftingResultSlotMixin: незеритовое кольцо — просто только Мистик
-                    Component.empty()
-            ),
             // enchanting_table.json: " B " / "A#A" / "###"  (B = книга, A = аметистовый осколок, # = гладкий базальт)
             new Entry(
                     "enchanting_table",

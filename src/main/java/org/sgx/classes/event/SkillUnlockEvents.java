@@ -44,10 +44,12 @@ public final class SkillUnlockEvents {
                 context.server().execute(() -> {
                     ServerPlayer player = context.player();
                     ProfessionData data = ModAttachments.get(player);
+                    var recipesBefore = org.sgx.classes.profession.RecipeUnlockNotice.snapshot(data);
                     if (data.unlockNextSkill()) {
                         playUnlockEffects(player);
                         SkillAttributeSync.reapply(player, data);
                         ProfessionNetworking.syncToClient(player);
+                        org.sgx.classes.profession.RecipeUnlockNotice.notifyNew(player, data, recipesBefore);
                     }
                 }));
     }

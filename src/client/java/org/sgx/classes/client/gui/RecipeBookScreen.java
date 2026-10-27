@@ -43,13 +43,14 @@ public final class RecipeBookScreen extends Screen {
     }
 
     /** profession == null -> виден всем; иначе виден только игроку этого класса.
-     * Чужие рецепты сюда вообще не попадают (не путать с unlocked() — та лишь
-     * блокирует крафт визуально, но запись всё равно в списке). */
+     * Чужие и ещё не открытые (unlocked() == false) рецепты сюда не попадают —
+     * рецепт появляется в списке только после открытия нужного навыка. */
     private static List<ModRecipeBook.Entry> visibleEntries() {
         ProfessionData data = ClientProfessionData.get();
         ProfessionType current = data.currentProfession();
         return ModRecipeBook.ENTRIES.stream()
                 .filter(e -> e.profession() == null || e.profession() == current)
+                .filter(e -> e.unlocked().test(data))
                 .collect(Collectors.toList());
     }
 

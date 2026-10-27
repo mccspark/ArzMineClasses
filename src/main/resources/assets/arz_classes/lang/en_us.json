@@ -105,6 +105,7 @@
   "message.arz_classes.knowledge_scroll_used": "§a+1 level §7(current: %s)",
   "message.arz_classes.knowledge_scroll_failed": "Class not selected or already at maximum level",
   "message.arz_classes.cooking_pot_locked": "Only a Cook can use the cooking pot",
+  "message.arz_classes.recipe_unlocked": "New recipe unlocked: %s",
   "message.arz_classes.quick_craft_result": "Rarity rolled: %s",
   "message.arz_classes.armor_not_sharpenable": "Only an Armorer can sharpen armor, holding a hammer in the off-hand",
   "message.arz_classes.sharpen_not_learned": "First learn the \"Tool Sharpening\" skill in the Blacksmith tree",

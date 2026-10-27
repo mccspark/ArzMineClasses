@@ -105,6 +105,7 @@
   "message.arz_classes.knowledge_scroll_used": "§a+1 уровень §7(сейчас: %s)",
   "message.arz_classes.knowledge_scroll_failed": "Класс не выбран или уже максимальный уровень",
   "message.arz_classes.cooking_pot_locked": "Готовить в кастрюле может только Повар",
+  "message.arz_classes.recipe_unlocked": "Открыт новый рецепт: %s",
   "message.arz_classes.quick_craft_result": "Выпала редкость: %s",
   "message.arz_classes.armor_not_sharpenable": "Точить броню может только Бронник, держа молот в оффхенде",
   "message.arz_classes.sharpen_not_learned": "Сначала изучите навык «Заточка инструментов» в дереве Кузнеца",
