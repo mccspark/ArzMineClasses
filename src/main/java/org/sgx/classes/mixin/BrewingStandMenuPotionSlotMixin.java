@@ -4,10 +4,12 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import org.sgx.classes.event.ProfessionEvents;
+import org.sgx.classes.item.BrewedPotions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,7 +25,23 @@ public abstract class BrewingStandMenuPotionSlotMixin {
         if (!(player instanceof ServerPlayer serverPlayer)) {
             return;
         }
+        // Опыт только за зелье, сваренное в этой зельеварке, и только один раз:
+        // пометку снимаем при любом взятии, так что "положил обратно и взял" опыта не даёт.
+        Slot self = (Slot) (Object) this;
+        boolean brewed = false;
+        if (self.container instanceof BrewedPotions.State state) {
+            int index = self.getContainerSlot();
+            brewed = state.arzClasses$isBrewed(index);
+            state.arzClasses$setBrewed(index, false);
+        }
+        if (!brewed) {
+            return;
+        }
         PotionContents contents = carried.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+        // Зелья без эффектов (густое, мирское, необычное, вода) опыта не дают.
+        if (!contents.hasEffects()) {
+            return;
+        }
         Optional<Holder<Potion>> potionHolder = contents.potion();
         if (potionHolder.isEmpty()) {
             return;

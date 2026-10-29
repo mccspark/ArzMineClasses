@@ -11,6 +11,9 @@ import net.minecraft.world.item.Items;
 /**
  * Окно выбора оформления. Слева список тем, справа живой предпросмотр: мини-окно рисуется в выбранной (ещё не
  * применённой) теме. «Применить» сохраняет тему для всех окон мода, «Отмена»/Esc — закрывает без изменений.
+ * <p>
+ * Запертые темы (см. {@link BookStyle#setUnlock}) видны в списке затемнёнными с замочком; выбрать их нельзя, но при
+ * наведении справа показывается их предпросмотр под затемнением и подсказка, как открыть.
  */
 public final class StyleScreen extends Screen {
 
@@ -78,6 +81,9 @@ public final class StyleScreen extends Screen {
             for (int i = 0; i < all.length; i++) {
                 int y = listY + i * rowH;
                 if (event.x() >= listX && event.x() < listX + LIST_W && event.y() >= y && event.y() < y + rowH - 2) {
+                    if (!BookStyle.isUnlocked(all[i])) {
+                        return true; // запертую тему не выбрать
+                    }
                     selected = all[i];
                     applyButton.active = selected != BookStyle.theme();
                     return true;
@@ -101,13 +107,18 @@ public final class StyleScreen extends Screen {
         graphics.centeredText(this.font, this.title, left + panelW / 2, top + 11, current.title());
         BookStyle.divider(graphics, left + panelW / 2, top + 26, panelW / 2 - 24);
 
+        BookStyle.Theme hoveredTheme = null;
         BookStyle.Theme[] all = BookStyle.Theme.values();
         for (int i = 0; i < all.length; i++) {
             BookStyle.Theme t = all[i];
+            boolean locked = !BookStyle.isUnlocked(t);
             int y = listY + i * rowH;
             int h = rowH - 2;
             boolean hovered = mouseX >= listX && mouseX < listX + LIST_W && mouseY >= y && mouseY < y + h;
-            BookStyle.row(graphics, listX, y, LIST_W, h, t == selected, hovered);
+            if (hovered) {
+                hoveredTheme = t;
+            }
+            BookStyle.row(graphics, listX, y, LIST_W, h, t == selected, hovered && !locked);
 
             int sx = listX + 6;
             int sy = y + (h - SWATCH) / 2;
@@ -121,15 +132,51 @@ public final class StyleScreen extends Screen {
             }
 
             Component name = Component.translatable("screen.arz_classes.ui_style.name." + t.id());
-            int color = t == selected ? current.title() : current.body();
+            int color = locked ? current.dim() : (t == selected ? current.title() : current.body());
             graphics.text(this.font, name, sx + SWATCH + 6, y + (h - 8) / 2 + 1, color);
-            if (t == current) {
+            if (locked) {
+                // затемнение строки и замочек справа
+                graphics.fill(listX + 1, y + 1, listX + LIST_W - 1, y + h - 1, 0x99000000);
+                lockIcon(graphics, listX + LIST_W - 12, y + (h - 7) / 2, current.dim());
+            } else if (t == current) {
                 // отметка «сейчас применено»
                 graphics.text(this.font, "*", listX + LIST_W - 10, y + (h - 8) / 2 + 1, current.dim());
             }
         }
 
-        drawPreview(graphics, prevX, prevY, prevW, prevH, selected);
+        // справа: предпросмотр наведённой темы (запертой — под затемнением с подсказкой), иначе выбранной
+        BookStyle.Theme shown = hoveredTheme != null ? hoveredTheme : selected;
+        drawPreview(graphics, prevX, prevY, prevW, prevH, shown);
+        if (!BookStyle.isUnlocked(shown)) {
+            drawLockedOverlay(graphics, prevX, prevY, prevW, prevH, shown, current);
+        }
+    }
+
+    /** Замочек 6×7. */
+    private static void lockIcon(GuiGraphicsExtractor g, int x, int y, int color) {
+        g.fill(x + 1, y, x + 5, y + 1, color);
+        g.fill(x + 1, y, x + 2, y + 3, color);
+        g.fill(x + 4, y, x + 5, y + 3, color);
+        g.fill(x, y + 3, x + 6, y + 7, color);
+    }
+
+    /** Затемнение предпросмотра запертой темы: замок и подсказка, как её открыть. */
+    private void drawLockedOverlay(GuiGraphicsExtractor g, int x, int y, int w, int h, BookStyle.Theme t,
+                                   BookStyle.Theme current) {
+        g.fill(x, y, x + w, y + h, 0xB0000000);
+        int cx = x + w / 2;
+        int cy = y + h / 2;
+        lockIcon(g, cx - 3, cy - 18, 0xFFE0E0E0);
+        Component hint = BookStyle.lockHint(t);
+        if (hint == null) {
+            hint = Component.translatable("screen.arz_classes.ui_style.locked");
+        }
+        var lines = this.font.split(hint, w - 20);
+        int ty = cy - 4;
+        for (int i = 0; i < Math.min(4, lines.size()); i++) {
+            g.centeredText(this.font, lines.get(i), cx, ty, 0xFFFFE2B0);
+            ty += 10;
+        }
     }
 
     /** Мини-окно в теме t: заголовок, текст, слоты, полоска, две кнопки (обычная и под курсором). */

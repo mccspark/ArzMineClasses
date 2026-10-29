@@ -9,8 +9,9 @@ import net.minecraft.world.inventory.Slot;
  * «Книжный фэнтези»-стиль окон мода: кожа/пергамент, кожаный кант, золотая линия и уголки, кожаные кнопки.
  * <p>
  * Тема выбирается в окне {@link StyleScreen} (шестерёнка в окне классов): классический (плоский) → книга светлая →
- * книга тёмная → зелёная → фиолетовая. Выбор хранится в config/arz_classes/ui_style.txt (имя темы) и действует на ВСЕ
- * окна мода. По умолчанию «книга светлая».
+ * книга тёмная → зелёная → фиолетовая → тыквенная (Хэллоуин, заперта до разблокировки модом arzmine-halloween).
+ * Выбор хранится в config/arz_classes/ui_style.txt (имя темы) и действует на ВСЕ окна мода.
+ * По умолчанию «книга светлая».
  * <p>
  * Все методы рисования есть в двух вариантах: без темы (берут текущую) и с явной темой — последние нужны
  * предпросмотру в {@link StyleScreen}, который рисует окно в ещё не применённой теме.
@@ -31,7 +32,10 @@ public final class BookStyle {
                 0xFF2C4F2E, 0xFF3B6A3D, 0xFF1F3A21, 0xFF4E8250, 0xFF12200F, 0xFFC9B85A, 0xFFE6F0D0, 0xFFFFFFE0, 0xFF6A8A6A),
         /** Фиолетовый переплёт. */
         PURPLE("purple", 0xF02A1A3A, 0xFF5B3A80, 0xFF3D2459, 0xFFB79A4A, 0xFFE8CE7A,
-                0xFF43296A, 0xFF58368A, 0xFF2E1B4A, 0xFF6E4A9C, 0xFF190E2A, 0xFFC9AE5E, 0xFFEBDDF5, 0xFFFFF0FF, 0xFF7C6A94);
+                0xFF43296A, 0xFF58368A, 0xFF2E1B4A, 0xFF6E4A9C, 0xFF190E2A, 0xFFC9AE5E, 0xFFEBDDF5, 0xFFFFF0FF, 0xFF7C6A94),
+        /** Тыквенная (Хэллоуин): открывается модом arzmine-halloween после 50 вырезанных тыкв. Рамка янтарная. */
+        PUMPKIN("pumpkin", 0xF0241008, 0xFFD2690E, 0xFF8A3F07, 0xFFFFB347, 0xFFFFE08A,
+                0xFFB85A0C, 0xFFD9730F, 0xFF4A2A10, 0xFFF09A3A, 0xFF2B1204, 0xFF3A1A06, 0xFFFFE2B0, 0xFFFFF4D6, 0xFF8A6A4A);
 
         final String id;
         final int fill, leather, leatherDark, gold, goldBright;
@@ -91,6 +95,93 @@ public final class BookStyle {
 
     private static Theme theme;
 
+    private static final java.util.Map<Theme, java.util.function.BooleanSupplier> UNLOCKS =
+            new java.util.EnumMap<>(Theme.class);
+
+    /** Запирает тему условием (регистрируют другие моды). Пока условие ложно, тему нельзя выбрать и применить. */
+    public static void setUnlock(Theme t, java.util.function.BooleanSupplier condition) {
+        UNLOCKS.put(t, condition);
+    }
+
+    private static final java.util.Map<Theme, Component> LOCK_HINTS = new java.util.EnumMap<>(Theme.class);
+
+    /** То же, плюс подсказка, как открыть тему (показывается в окне выбора оформления). */
+    public static void setUnlock(Theme t, java.util.function.BooleanSupplier condition, Component hint) {
+        UNLOCKS.put(t, condition);
+        LOCK_HINTS.put(t, hint);
+    }
+
+    /** Подсказка, как открыть тему; null, если её не задали. */
+    public static Component lockHint(Theme t) {
+        return LOCK_HINTS.get(t);
+    }
+
+    /** Темы, закрытые по умолчанию: открываются только когда другой мод подтвердил условие (и дальше помнятся). */
+    private static final java.util.Set<Theme> LOCKED_BY_DEFAULT = java.util.EnumSet.of(Theme.PUMPKIN);
+
+    private static java.util.Set<Theme> earned;
+
+    private static java.nio.file.Path earnedFile() {
+        return net.fabricmc.loader.api.FabricLoader.getInstance().getConfigDir()
+                .resolve("arz_classes").resolve("unlocked_themes.txt");
+    }
+
+    /** Заработанные ранее темы (файл читается один раз). Нужно, чтобы тема не пропала, если мод-ивент уберут. */
+    private static java.util.Set<Theme> earned() {
+        if (earned == null) {
+            earned = java.util.EnumSet.noneOf(Theme.class);
+            try {
+                java.nio.file.Path f = earnedFile();
+                if (java.nio.file.Files.exists(f)) {
+                    for (String line : java.nio.file.Files.readAllLines(f)) {
+                        for (Theme t : Theme.values()) {
+                            if (t.id.equals(line.trim().toLowerCase())) {
+                                earned.add(t);
+                            }
+                        }
+                    }
+                }
+            } catch (Exception ignored) {
+                // нет файла — ничего не заработано
+            }
+        }
+        return earned;
+    }
+
+    private static void remember(Theme t) {
+        if (!earned().add(t)) {
+            return;
+        }
+        try {
+            java.nio.file.Path f = earnedFile();
+            java.nio.file.Files.createDirectories(f.getParent());
+            StringBuilder sb = new StringBuilder();
+            for (Theme e : earned()) {
+                sb.append(e.id).append('\n');
+            }
+            java.nio.file.Files.writeString(f, sb.toString());
+        } catch (Exception ignored) {
+            // не сохранилось — откроется заново при следующем подтверждении
+        }
+    }
+
+    /** Доступна ли тема игроку. Обычные темы — всегда; закрытые по умолчанию — если заработаны сейчас или раньше. */
+    public static boolean isUnlocked(Theme t) {
+        if (!LOCKED_BY_DEFAULT.contains(t)) {
+            java.util.function.BooleanSupplier c = UNLOCKS.get(t);
+            return c == null || c.getAsBoolean();
+        }
+        if (earned().contains(t)) {
+            return true;
+        }
+        java.util.function.BooleanSupplier c = UNLOCKS.get(t);
+        if (c != null && c.getAsBoolean()) {
+            remember(t);
+            return true;
+        }
+        return false;
+    }
+
     private BookStyle() {
     }
 
@@ -99,7 +190,11 @@ public final class BookStyle {
                 .resolve("arz_classes").resolve("ui_style.txt");
     }
 
-    /** Текущая тема (читается из файла при первом обращении). */
+    /**
+     * Текущая тема (читается из файла при первом обращении). Если выбранная тема сейчас заперта
+     * (например, тыквенная, пока не вырезано 50 тыкв), временно показывается «книга светлая»,
+     * а сохранённый выбор не трогается.
+     */
     public static Theme theme() {
         if (theme == null) {
             Theme value = Theme.BROWN;
@@ -118,7 +213,7 @@ public final class BookStyle {
             }
             theme = value;
         }
-        return theme;
+        return isUnlocked(theme) ? theme : Theme.BROWN;
     }
 
     /** Включён ли книжный стиль (любая тема, кроме классической). */
@@ -126,8 +221,11 @@ public final class BookStyle {
         return theme() != Theme.CLASSIC;
     }
 
-    /** Применяет тему ко всем окнам мода; выбор запоминается. */
+    /** Применяет тему ко всем окнам мода; выбор запоминается. Запертую тему применить нельзя. */
     public static void set(Theme value) {
+        if (!isUnlocked(value)) {
+            return;
+        }
         theme = value;
         try {
             java.nio.file.Path f = file();
@@ -138,10 +236,17 @@ public final class BookStyle {
         }
     }
 
-    /** Следующая тема по кругу; выбор запоминается. */
+    /** Следующая доступная тема по кругу (запертые пропускаются); выбор запоминается. */
     public static void next() {
         Theme[] all = Theme.values();
-        set(all[(theme().ordinal() + 1) % all.length]);
+        int from = theme().ordinal();
+        for (int k = 1; k <= all.length; k++) {
+            Theme candidate = all[(from + k) % all.length];
+            if (isUnlocked(candidate)) {
+                set(candidate);
+                return;
+            }
+        }
     }
 
     // ---------------- цвета текста для экранов (в классической теме возвращают исходный цвет экрана) ----------------
@@ -185,7 +290,7 @@ public final class BookStyle {
         panel(g, x, y, w, h, t, true);
     }
 
-    /** Панель; corners = false — без угловых ромбиков (для контейнеров, где в углах стоят слоты). */
+    /** Панель; corners = false — без угловых украшений (для контейнеров, где в углах стоят слоты). */
     public static void panel(GuiGraphicsExtractor g, int x, int y, int w, int h, Theme t, boolean corners) {
         if (t == Theme.CLASSIC) {
             g.fill(x, y, x + w, y + h, 0xC0101010);
@@ -198,6 +303,11 @@ public final class BookStyle {
         g.outline(x + 1, y + 1, w - 2, h - 2, t.leather);
         g.outline(x + 2, y + 2, w - 4, h - 4, t.leatherDark);
         g.outline(x + 3, y + 3, w - 6, h - 6, t.gold);
+        if (t == Theme.PUMPKIN) {
+            // Хэллоуин: паутина, летучие мыши, тыквы-фонарики вместо ромбиков
+            HalloweenArt.panelDecor(g, x, y, w, h, corners);
+            return;
+        }
         if (corners) {
             diamond(g, x + 7, y + 7, t.goldBright);
             diamond(g, x + w - 8, y + 7, t.goldBright);
@@ -221,6 +331,11 @@ public final class BookStyle {
             return;
         }
         int dim = (t.gold & 0x00FFFFFF) | 0x99000000;
+        if (t == Theme.PUMPKIN) {
+            // конфета — тыква — конфета
+            HalloweenArt.divider(g, cx, y, halfWidth, dim);
+            return;
+        }
         g.fill(cx - halfWidth, y, cx - 5, y + 1, dim);
         g.fill(cx + 5, y, cx + halfWidth, y + 1, dim);
         diamond(g, cx, y, t.goldBright);
@@ -255,9 +370,12 @@ public final class BookStyle {
         g.fill(x + 1, y + h - 2, x + w - 1, y + h - 1, t.btnDisabled);
         g.outline(x, y, w, h, t.btnOutline);
         g.outline(x + 2, y + 2, w - 4, h - 4, hovered && active ? t.goldBright : t.gold);
-        for (int sx = x + 6; sx < x + w - 6; sx += 4) {
-            g.fill(sx, y + 1, sx + 1, y + 2, t.stitch);
-            g.fill(sx, y + h - 2, sx + 1, y + h - 1, t.stitch);
+        int stitchIndex = 0;
+        for (int sx = x + 6; sx < x + w - 6; sx += 4, stitchIndex++) {
+            // в тыквенной теме «стежки» — разноцветные конфетные точки
+            int sc = t == Theme.PUMPKIN ? HalloweenArt.stitchColor(stitchIndex) : t.stitch;
+            g.fill(sx, y + 1, sx + 1, y + 2, sc);
+            g.fill(sx, y + h - 2, sx + 1, y + h - 1, sc);
         }
         if (label != null) {
             g.text(font, label, x + (w - font.width(label)) / 2, y + (h - 8) / 2 + 1,

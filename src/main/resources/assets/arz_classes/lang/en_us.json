@@ -635,5 +635,7 @@
   "block.arz_classes.pale_oak_glass_door": "Pale Oak Glass Door",
   "block.arz_classes.cherry_glass_door": "Cherry Glass Door",
   "block.arz_classes.mangrove_glass_door": "Mangrove Glass Door",
-  "block.arz_classes.bamboo_glass_door": "Bamboo Glass Door"
+  "block.arz_classes.bamboo_glass_door": "Bamboo Glass Door",
+  "screen.arz_classes.ui_style.locked": "Тема пока закрыта",
+  "screen.arz_classes.ui_style.name.pumpkin": "Pumpkin"
 }
