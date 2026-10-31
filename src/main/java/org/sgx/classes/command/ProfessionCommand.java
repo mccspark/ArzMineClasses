@@ -144,6 +144,15 @@ public final class ProfessionCommand {
                         .then(argument("target", GameProfileArgument.gameProfile())
                                 .executes(ProfessionCommand::adminInfo)))
 
+                // /profession top <class> [страница] — рейтинг всех игроков класса по опыту (онлайн и оффлайн)
+                .then(literal("top")
+                        .requires(IS_ADMIN)
+                        .then(argument("class", StringArgumentType.word())
+                                .suggests(classSuggestions())
+                                .executes(ctx -> ClassTopList.run(ctx, 1))
+                                .then(argument("page", IntegerArgumentType.integer(1))
+                                        .executes(ctx -> ClassTopList.run(ctx, IntegerArgumentType.getInteger(ctx, "page"))))))
+
                 // /profession globalXP set <множитель> [время] | return — только админ
                 .then(literal("globalXP")
                         .requires(IS_ADMIN)

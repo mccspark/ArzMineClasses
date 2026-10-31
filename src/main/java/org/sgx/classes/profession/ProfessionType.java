@@ -46,6 +46,15 @@ public enum ProfessionType implements StringRepresentable {
         return XP_TABLE[currentLevel];
     }
 
+    /** Весь накопленный опыт: сумма опыта пройденных уровней + опыт на текущем уровне. */
+    public long totalXp(int level, int xpOnLevel) {
+        long total = xpOnLevel;
+        for (int i = 0; i < Math.min(level, XP_TABLE.length); i++) {
+            total += XP_TABLE[i];
+        }
+        return total;
+    }
+
     public Component displayName() {
         return Component.translatable("profession.arz_classes." + id);
     }
