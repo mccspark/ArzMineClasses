@@ -16,6 +16,7 @@ import org.sgx.classes.event.ProfessionEvents;
 import org.sgx.classes.profession.MysticEnchantBoost;
 import org.sgx.classes.profession.ProfessionData;
 import org.sgx.classes.profession.ProfessionType;
+import org.sgx.classes.profession.ShyllowEnchant;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -81,6 +82,8 @@ public abstract class MysticEnchantmentMenuMixin {
             power = arzClasses$power[slot];
         }
         List<EnchantmentInstance> list = original.call(access, stack, slot, power);
+        // «Пустой» вариант на удочку/булаву (ванильных чар на такой силе нет) -> вместо пустоты даём Shyllow.
+        list = ShyllowEnchant.fallbackIfEmpty(access, stack, list);
         if (arzClasses$owner instanceof ServerPlayer player) {
             return MysticEnchantBoost.apply(list, ModAttachments.get(player));
         }
@@ -106,6 +109,7 @@ public abstract class MysticEnchantmentMenuMixin {
         }
         org.sgx.classes.item.ClassBookHooks.onTableEnchanted(serverPlayer,
                 ((EnchantmentMenu) (Object) this).getSlot(0).getItem());
+        ShyllowEnchant.applyVisuals(((EnchantmentMenu) (Object) this).getSlot(0).getItem());
         if (arzClasses$powerBefore > 0) {
             ProfessionEvents.onEnchant(serverPlayer, arzClasses$powerBefore);
         }

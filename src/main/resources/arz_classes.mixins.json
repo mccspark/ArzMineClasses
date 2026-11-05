@@ -27,7 +27,9 @@
 		"ClassBookAnvilMixin",
 		"MinerHelmetNoBreakMixin",
 		"InventoryMenuMixin",
-		"CrafterBlockMixin"
+		"CrafterBlockMixin",
+		"ShyllowGrindstoneMixin",
+		"CookingPotMenuClickMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

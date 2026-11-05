@@ -637,5 +637,7 @@
   "block.arz_classes.mangrove_glass_door": "Mangrove Glass Door",
   "block.arz_classes.bamboo_glass_door": "Bamboo Glass Door",
   "screen.arz_classes.ui_style.locked": "Тема пока закрыта",
-  "screen.arz_classes.ui_style.name.pumpkin": "Pumpkin"
+  "screen.arz_classes.ui_style.name.pumpkin": "Pumpkin",
+
+  "enchantment.arz_classes.shyllow": "Shyllow"
 }

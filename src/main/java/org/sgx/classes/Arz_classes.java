@@ -71,6 +71,7 @@ public class Arz_classes implements ModInitializer {
 		org.sgx.classes.item.MysticBookTracker.init();
 		org.sgx.classes.profession.ClassAdvancements.init();
 		ModCreativeTabs.init();
+		CookingPotXp.init();
 		SkillUnlockEvents.init();
 		HammerArmorGuard.init();
 		FishingRodRepair.init();
