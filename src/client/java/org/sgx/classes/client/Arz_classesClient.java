@@ -26,6 +26,10 @@ public class Arz_classesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ProfessionClientNetworking.init();
+        // манекен — стойка для брони: переиспользуем ванильный рендер (броня), «пугало» рисует item_display
+        net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.register(
+                org.sgx.classes.entity.ModEntities.TRAINING_DUMMY,
+                net.minecraft.client.renderer.entity.ArmorStandRenderer::new);
         // замедление рубки больших деревьев: на клиенте данные профессии лежат в ClientProfessionData
         TreeChopSpeed.setClientDataSupplier(ClientProfessionData::get);
         ModKeyBindings.init();

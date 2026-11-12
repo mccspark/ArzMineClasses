@@ -129,6 +129,32 @@ public final class BonePouchItem extends Item {
         for (int f = 0; f < length; f++) {
             BlockPos pos = clickedPos.relative(forward, f);
             BlockState state = world.getBlockState(pos);
+            if (instantGrowth && org.sgx.classes.profession.impl.FarmerBonemealHandler.isGrowable(state.getBlock())) {
+                // мгновенный рост: растит до конца; выросший росток тыквы/арбуза даёт плод
+                if (!consume(pouch, 1)) {
+                    break;
+                }
+                if (org.sgx.classes.profession.impl.FarmerBonemealHandler.applyInstant(world, player, pos, state)) {
+                    grown++;
+                } else {
+                    // ничего не изменилось — костную муку возвращаем
+                    NonNullList<ItemStack> items = readContents(pouch);
+                    for (int i = 0; i < items.size(); i++) {
+                        ItemStack slot = items.get(i);
+                        if (slot.isEmpty()) {
+                            items.set(i, new ItemStack(net.minecraft.world.item.Items.BONE_MEAL));
+                            break;
+                        }
+                        if (slot.is(net.minecraft.world.item.Items.BONE_MEAL) && slot.getCount() < SLOT_CAPACITY) {
+                            slot.grow(1);
+                            break;
+                        }
+                    }
+                    writeContents(pouch, items);
+                }
+                continue;
+            }
+
             if (!(state.getBlock() instanceof BonemealableBlock target)
                     || !target.isValidBonemealTarget(world, pos, state)) {
                 continue;
@@ -136,12 +162,7 @@ public final class BonePouchItem extends Item {
             if (!consume(pouch, 1)) {
                 break;
             }
-
-            if (instantGrowth && state.getBlock() instanceof CropBlock crop) {
-                world.setBlockAndUpdate(pos, crop.getStateForAge(crop.getMaxAge()));
-            } else {
-                target.performBonemeal(world, world.getRandom(), pos, state);
-            }
+            target.performBonemeal(world, world.getRandom(), pos, state);
 
             world.sendParticles(ParticleTypes.HAPPY_VILLAGER,
                     pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3, 0.2, 0.2, 0.2, 0.0);

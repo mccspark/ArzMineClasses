@@ -1,11 +1,13 @@
 package org.sgx.classes.block;
 
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import org.sgx.classes.block.chest.ModChests;
+import org.sgx.classes.item.ModBlocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,11 @@ public record CarpenterRecipe(List<Input> inputs, ItemStack result) {
                         List.of(Input.of(ModChests.planksFor(wood), 4), Input.of(Items.GLASS, 2)),
                         new ItemStack(ModGlassDoors.item(wood), 3)));
             }
+            // манекен для тренировок: 2 бревна + сено + 4 палки + 3 нити
+            list.add(new CarpenterRecipe(
+                    List.of(Input.tag(ItemTags.LOGS, Items.OAK_LOG, 2), Input.of(Items.HAY_BLOCK, 1),
+                            Input.of(Items.STICK, 4), Input.of(Items.STRING, 3)),
+                    new ItemStack(org.sgx.classes.entity.ModEntities.TRAINING_DUMMY_ITEM, 1)));
             return List.copyOf(list);
         }
     }

@@ -1,0 +1,379 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "planks": "minecraft:block/dark_oak_planks",
+    "log": "minecraft:block/stripped_oak_log",
+    "top": "minecraft:block/stripped_oak_log_top",
+    "straw": "minecraft:block/hay_block_side",
+    "burlap": "arz_classes:block/training_dummy_burlap",
+    "face": "arz_classes:block/training_dummy_face",
+    "rope": "arz_classes:block/training_dummy_rope",
+    "target": "arz_classes:block/training_dummy_target",
+    "particle": "minecraft:block/stripped_oak_log"
+  },
+  "elements": [
+    {
+      "name": "post_top",
+      "from": [
+        6.5,
+        0,
+        6.5
+      ],
+      "to": [
+        9.5,
+        6,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#log"
+        },
+        "south": {
+          "texture": "#log"
+        },
+        "east": {
+          "texture": "#log"
+        },
+        "west": {
+          "texture": "#log"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "down": {
+          "texture": "#top"
+        }
+      }
+    },
+    {
+      "name": "torso",
+      "from": [
+        4,
+        0.5,
+        5
+      ],
+      "to": [
+        12,
+        9.5,
+        11
+      ],
+      "faces": {
+        "north": {
+          "texture": "#straw"
+        },
+        "south": {
+          "texture": "#straw"
+        },
+        "east": {
+          "texture": "#straw"
+        },
+        "west": {
+          "texture": "#straw"
+        },
+        "up": {
+          "texture": "#straw"
+        },
+        "down": {
+          "texture": "#straw"
+        }
+      }
+    },
+    {
+      "name": "belt",
+      "from": [
+        3.75,
+        3.5,
+        4.75
+      ],
+      "to": [
+        12.25,
+        5,
+        11.25
+      ],
+      "faces": {
+        "north": {
+          "texture": "#rope"
+        },
+        "south": {
+          "texture": "#rope"
+        },
+        "east": {
+          "texture": "#rope"
+        },
+        "west": {
+          "texture": "#rope"
+        },
+        "up": {
+          "texture": "#rope"
+        },
+        "down": {
+          "texture": "#rope"
+        }
+      }
+    },
+    {
+      "name": "arms",
+      "from": [
+        0.5,
+        6.5,
+        6.5
+      ],
+      "to": [
+        15.5,
+        8.5,
+        9.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#log"
+        },
+        "south": {
+          "texture": "#log"
+        },
+        "east": {
+          "texture": "#log"
+        },
+        "west": {
+          "texture": "#log"
+        },
+        "up": {
+          "texture": "#top"
+        },
+        "down": {
+          "texture": "#top"
+        }
+      }
+    },
+    {
+      "name": "hand_l",
+      "from": [
+        0,
+        5.5,
+        5.5
+      ],
+      "to": [
+        2,
+        9.5,
+        10.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#burlap"
+        },
+        "south": {
+          "texture": "#burlap"
+        },
+        "east": {
+          "texture": "#burlap"
+        },
+        "west": {
+          "texture": "#burlap"
+        },
+        "up": {
+          "texture": "#burlap"
+        },
+        "down": {
+          "texture": "#burlap"
+        }
+      }
+    },
+    {
+      "name": "hand_r",
+      "from": [
+        14,
+        5.5,
+        5.5
+      ],
+      "to": [
+        16,
+        9.5,
+        10.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#burlap"
+        },
+        "south": {
+          "texture": "#burlap"
+        },
+        "east": {
+          "texture": "#burlap"
+        },
+        "west": {
+          "texture": "#burlap"
+        },
+        "up": {
+          "texture": "#burlap"
+        },
+        "down": {
+          "texture": "#burlap"
+        }
+      }
+    },
+    {
+      "name": "head",
+      "from": [
+        5,
+        9.5,
+        5.5
+      ],
+      "to": [
+        11,
+        14.5,
+        10.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#face"
+        },
+        "south": {
+          "texture": "#burlap"
+        },
+        "east": {
+          "texture": "#burlap"
+        },
+        "west": {
+          "texture": "#burlap"
+        },
+        "up": {
+          "texture": "#burlap"
+        },
+        "down": {
+          "texture": "#burlap"
+        }
+      }
+    },
+    {
+      "name": "knot",
+      "from": [
+        7.25,
+        14.5,
+        7.25
+      ],
+      "to": [
+        8.75,
+        15.25,
+        8.75
+      ],
+      "faces": {
+        "north": {
+          "texture": "#rope"
+        },
+        "south": {
+          "texture": "#rope"
+        },
+        "east": {
+          "texture": "#rope"
+        },
+        "west": {
+          "texture": "#rope"
+        },
+        "up": {
+          "texture": "#rope"
+        },
+        "down": {
+          "texture": "#rope"
+        }
+      }
+    },
+    {
+      "name": "hat_brim",
+      "from": [
+        3.5,
+        14.25,
+        3.5
+      ],
+      "to": [
+        12.5,
+        15,
+        12.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#straw"
+        },
+        "south": {
+          "texture": "#straw"
+        },
+        "east": {
+          "texture": "#straw"
+        },
+        "west": {
+          "texture": "#straw"
+        },
+        "up": {
+          "texture": "#straw"
+        },
+        "down": {
+          "texture": "#straw"
+        }
+      }
+    },
+    {
+      "name": "hat_crown",
+      "from": [
+        5.5,
+        15,
+        5.5
+      ],
+      "to": [
+        10.5,
+        16,
+        10.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#straw"
+        },
+        "south": {
+          "texture": "#straw"
+        },
+        "east": {
+          "texture": "#straw"
+        },
+        "west": {
+          "texture": "#straw"
+        },
+        "up": {
+          "texture": "#straw"
+        },
+        "down": {
+          "texture": "#straw"
+        }
+      }
+    },
+    {
+      "name": "target",
+      "from": [
+        4.5,
+        1.5,
+        4.25
+      ],
+      "to": [
+        11.5,
+        8.5,
+        5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#target"
+        },
+        "south": {
+          "texture": "#planks"
+        },
+        "east": {
+          "texture": "#planks"
+        },
+        "west": {
+          "texture": "#planks"
+        },
+        "up": {
+          "texture": "#planks"
+        },
+        "down": {
+          "texture": "#planks"
+        }
+      }
+    }
+  ]
+}

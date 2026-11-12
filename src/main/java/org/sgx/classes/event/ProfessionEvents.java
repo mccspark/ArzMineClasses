@@ -167,7 +167,9 @@ public final class ProfessionEvents {
                 ServerLevel serverLevel = (ServerLevel) world;
                 int countBefore = getRicePanicleCount(serverLevel, pos);
                 ProfessionData data = ModAttachments.get(serverPlayer);
-                if (data.currentProfession() == ProfessionType.FARMER && countBefore > 0) {
+                if (data.currentProfession() == ProfessionType.FARMER && countBefore > 0
+                        && org.sgx.classes.profession.WeaponSharpening.isKnife(serverPlayer.getMainHandItem())) {
+                    // золотой рис только при разрезании ножом; забрать метёлку рукой (или положить) — не считается
                     double rareChance = data.customScalarTotal("farmer.rare_crop_drop_chance_percent");
                     if (rareChance > 0) {
                         // капаем на 2% (не на общие 50%, как у остальных культур) — сейчас

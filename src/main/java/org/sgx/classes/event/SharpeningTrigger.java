@@ -1,6 +1,7 @@
 package org.sgx.classes.event;
 
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -12,6 +13,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.sgx.classes.attachment.ModAttachments;
 import org.sgx.classes.item.ModItems;
 import org.sgx.classes.network.OpenSharpeningPayload;
@@ -59,6 +62,31 @@ public final class SharpeningTrigger {
     }
 
     public static void init() {
+        // Трезубец/лук/арбалет в основной руке + материал починки в другой, взгляд на кузнечный стол:
+        // это починка, а не бросок/натяжение. Работает и на клиенте, иначе клиент начинает замах.
+        UseItemCallback.EVENT.register((player, world, hand) -> {
+            if (hand != InteractionHand.MAIN_HAND) {
+                return InteractionResult.PASS;
+            }
+            ItemStack main = player.getMainHandItem();
+            if (!(main.is(net.minecraft.world.item.Items.TRIDENT)
+                    || main.is(net.minecraft.world.item.Items.BOW)
+                    || main.is(net.minecraft.world.item.Items.CROSSBOW))) {
+                return InteractionResult.PASS;
+            }
+            if (!RepairMaterials.isValid(main, player.getOffhandItem())) {
+                return InteractionResult.PASS;
+            }
+            HitResult hit = player.pick(5.0, 1.0f, false);
+            if (hit instanceof BlockHitResult blockHit
+                    && hit.getType() == HitResult.Type.BLOCK
+                    && BuiltInRegistries.BLOCK.getKey(world.getBlockState(blockHit.getBlockPos()).getBlock())
+                            .getPath().equals("smithing_table")) {
+                return InteractionResult.FAIL;
+            }
+            return InteractionResult.PASS;
+        });
+
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
             if (!(player instanceof ServerPlayer serverPlayer) || world.isClientSide()) {
                 return InteractionResult.PASS;

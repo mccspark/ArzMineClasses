@@ -33,6 +33,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.ADMIN_KNOCKBACK_STICK);
                         output.accept(ModBlocks.RARITY_UPGRADE_TABLE_ITEM);
                         output.accept(ModBlocks.CARPENTER_WORKBENCH_ITEM);
+                        output.accept(org.sgx.classes.entity.ModEntities.TRAINING_DUMMY_ITEM);
                         for (var rack : org.sgx.classes.block.ModWeaponRacks.allItems()) {
                             output.accept(rack);
                         }
